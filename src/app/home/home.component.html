@@ -1,0 +1,41 @@
+<div *ngIf="nav.visible" class='main-nav'>
+  <div class='navbar navbar-inverse'>
+    <div class='navbar-header'>
+      <div fxFlex>
+        <h1>Debt'off</h1>
+        <md-list >
+          <md-list-item style="color: wheat">
+            <img md-list-avatar src="../../assets/leader.jpg">
+            <h4 *ngIf="user" md-line>{{user.firstName}}</h4>
+          </md-list-item>
+        </md-list>
+      </div>
+      <!--<p *ngIf="token">{{}}</p>-->
+    </div>
+    <div class='clearfix'></div>
+    <div class='navbar-collapse collapse'>
+      <ul class='nav navbar-nav'>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]="['/home/debts']">
+            <span class='glyphicon glyphicon-home'></span> Debts
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/counter">
+            <span class='glyphicon glyphicon-education'></span> Communities
+          </a>
+        </li>
+        <li routerLinkActive="link-active">
+          <a routerLink="/fetch-data">
+            <span class='glyphicon glyphicon-th-list'></span> Settings
+          </a>
+        </li>
+        <li routerLinkActive="link-active">
+          <a (click)="logout()" routerLink="/header">
+            <span class='glyphicon glyphicon-th-large'></span> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
