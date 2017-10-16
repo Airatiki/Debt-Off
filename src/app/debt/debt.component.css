@@ -1,0 +1,29 @@
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  /*min-height: 300px;*/
+  /*max-height: 300px;*/
+  padding: 10px;
+}
+
+.example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 20px;
+  padding: 30px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.crop {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}

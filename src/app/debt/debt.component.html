@@ -1,6 +1,107 @@
-<p >
-  messages works!
-</p>
+<!--<p *ngIf="debts">-->
+  <!--{{debts.debts.toString()}}-->
+  <!--messages works!-->
+<!--</p>-->
+
+<div class="container flex-spacer"
+     fxLayout="row"
+     fxLayout.sm="column"
+     fxLayout.xs="column"
+     fxLayoutAlign.gt-md="space-around center"
+     fxLayoutGap="10px">
+
+<div fxFlex="40%" class="example-container mat-elevation-z8">
+  <h3>CREDITS,  Total Amount: {{kek}} </h3>
+
+  <mat-table  #table [dataSource]="dataCredits">
+
+    <ng-container matColumnDef="avatar">
+      <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+      <mat-cell *matCellDef="let row"> <div class="crop"> <img src={{row.user.avatarUri}}></div> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> UserName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.userName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FirstName">
+      <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="LastName">
+      <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let row" style = "color: green"> {{row.totalAmount}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 id="creditsPaginator"
+                 [length]="creditsDatabase.data.length"
+                 [pageIndex]="0"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
 
 
 
+
+
+
+<div fxFlex="40%" class="example-container mat-elevation-z8">
+  <h3>DEBTS,  Total Amount: </h3>
+
+  <mat-table #tabl [dataSource]="dataDebts">
+
+    <ng-container matColumnDef="avatar">
+      <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+      <mat-cell *matCellDef="let row"> <div class="crop"> <img src={{row.user.avatarUri}}></div> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> UserName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.userName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FirstName">
+      <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="LastName">
+      <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let row" style = "color: red"> {{row.totalAmount}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #debtsPaginator
+                 id="debtsPaginator"
+                 [length]="debtsDatabase.data.length"
+                 [pageIndex]="0"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
+</div>
+
+<a routerLink="/home/userinfo/kek">kek</a>

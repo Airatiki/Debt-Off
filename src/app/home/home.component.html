@@ -1,14 +1,14 @@
-<div *ngIf="nav.visible" class='main-nav'>
+<div *ngIf="nav.visible && isUser" class='main-nav'>
   <div class='navbar navbar-inverse'>
     <div class='navbar-header'>
       <div fxFlex>
         <h1>Debt'off</h1>
-        <md-list >
-          <md-list-item style="color: wheat">
-            <img md-list-avatar src="../../assets/leader.jpg">
-            <h4 *ngIf="user" md-line>{{user.firstName}}</h4>
-          </md-list-item>
-        </md-list>
+        <mat-list >
+          <mat-list-item style="color: wheat">
+            <img mat-list-avatar src={{user.info.avatarUri}}>
+            <h4  mat-line>{{user.info.firstName}}</h4>
+          </mat-list-item>
+        </mat-list>
       </div>
       <!--<p *ngIf="token">{{}}</p>-->
     </div>
@@ -39,3 +39,4 @@
     </div>
   </div>
 </div>
+<router-outlet></router-outlet>

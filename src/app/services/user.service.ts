@@ -7,13 +7,22 @@ export class UserService {
   constructor(private http: Http) { }
 
   getUserSelf() {
-    return this.http.get('https://debtoff.azurewebsites.net/api/user/self', this.jwt()).map((response: Response) => response.json());
+    return this.http.get('https://debtoff.azurewebsites.net/api/user/self', this.jwt());
   }
   getUserSummary() {
-    console.log(localStorage.getItem('currentUser'));
-    console.log(this.jwt());
     return this.http.get('https://debtoff.azurewebsites.net/api/loan/summary', this.jwt());
   }
+  getUserHistory(id) {
+    console.log('LIZA ++++++', id);
+    return this.http.get('https://debtoff.azurewebsites.net/api/loan/user/' + id, this.jwt());
+  }
+  getUserInfo(id) {
+    console.log('LIZA ++++++', id);
+    return this.http.get('https://debtoff.azurewebsites.net/api/user/' + id, this.jwt());
+  }
+
+
+
 
 
   private jwt() {

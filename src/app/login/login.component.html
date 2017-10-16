@@ -1,31 +1,31 @@
-<div style="background-color: #512DA8">
-<md-toolbar md-dialog-title color="primary">
+<div >
+<mat-toolbar mat-dialog-title color="primary">
   Login
   <span class="flex-spacer"></span>
-  <button md-button md-dialog-close>&times;</button>
-</md-toolbar>
+  <button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
 
 <!--<p>{{user | json}}</p>-->
 <!--<form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">-->
-  <!--<md-dialog-content>-->
+  <!--<mat-dialog-content>-->
     <!--<p>-->
-      <!--<md-input-container dividerColor="{{username.invalid && !username.pristine ? 'warn' : 'primary'}}">-->
-        <!--<input mdInput placeholder="Username" type="text" [(ngModel)]="user.username" #username="ngModel" name="username" required>-->
-      <!--</md-input-container>-->
-      <!--<md-input-container dividerColor="{{password.invalid && !password.pristine ? 'warn' : 'primary'}}">-->
-        <!--<input mdInput placeholder="Password" type="password" [(ngModel)]="user.password" #password="ngModel" name="password" required>-->
-      <!--</md-input-container>-->
-      <!--<md-checkbox [(ngModel)]="user.remember" name="remember">-->
+      <!--<mat-input-container dividerColor="{{username.invalid && !username.pristine ? 'warn' : 'primary'}}">-->
+        <!--<input matInput placeholder="Username" type="text" [(ngModel)]="user.username" #username="ngModel" name="username" required>-->
+      <!--</mat-input-container>-->
+      <!--<mat-input-container dividerColor="{{password.invalid && !password.pristine ? 'warn' : 'primary'}}">-->
+        <!--<input matInput placeholder="Password" type="password" [(ngModel)]="user.password" #password="ngModel" name="password" required>-->
+      <!--</mat-input-container>-->
+      <!--<mat-checkbox [(ngModel)]="user.remember" name="remember">-->
         <!--Remember me-->
-      <!--</md-checkbox>-->
+      <!--</mat-checkbox>-->
     <!--</p>-->
-  <!--</md-dialog-content>-->
-  <!--<md-dialog-actions>-->
+  <!--</mat-dialog-content>-->
+  <!--<mat-dialog-actions>-->
     <!--<span class="flex-spacer"></span>-->
-    <!--<button md-button md-dialog-close>Cancel</button>-->
-    <!--<button type="submit" md-button class="background-primary text-floral-white"-->
+    <!--<button mat-button mat-dialog-close>Cancel</button>-->
+    <!--<button type="submit" mat-button class="background-primary text-floral-white"-->
             <!--[disabled]="loginForm.form.invalid">Login</button>-->
-  <!--</md-dialog-actions>-->
+  <!--</mat-dialog-actions>-->
   <!--<a href="gooogle.com"> don't have an account yet</a>-->
 <!--</form>-->
 
@@ -33,7 +33,7 @@
 <div *ngIf="error" [ngClass]="{ 'alert-danger': 'error'}">{{errorMessage}}</div>
 
 
-<div *ngIf="signin" class="col-md-6 col-md-offset-3">
+<div *ngIf="signin" class="col-mat-6 col-mat-offset-3">
   <h2>Login</h2>
   <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
@@ -56,7 +56,7 @@
 
 
 
-<div *ngIf="registration" class="col-md-6 col-md-offset-3">
+<div *ngIf="registration" class="col-mat-6 col-mat-offset-3">
   <h2>Register</h2>
   <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
@@ -69,10 +69,10 @@
       <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
       <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nickname.valid }">
-      <label for="nickname">Username</label>
-      <input type="text" class="form-control" name="nickname" [(ngModel)]="model.nickname" #nickname="ngModel" required />
-      <div *ngIf="f.submitted && !nickname.valid" class="help-block">Username is required</div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && username.valid }">
+      <label for=userName>Username</label>
+      <input type="text" class="form-control" name=userName [(ngModel)]="model.userName" userName="ngModel" required />
+      <div *ngIf="f.submitted && username.valid" class="help-block">Username is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label for="email">Email</label>

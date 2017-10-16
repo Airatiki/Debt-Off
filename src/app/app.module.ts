@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import 'hammerjs';
 import { HomeComponent } from './home/home.component';
 import { DebtComponent } from './debt/debt.component';
+import {NoConflictStyleCompatibilityMode} from '@angular/material';
+import { UserinfoComponent } from './userinfo/userinfo.component';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { DebtComponent } from './debt/debt.component';
     HeaderComponent,
     LoginComponent,
     HomeComponent,
-    DebtComponent
+    DebtComponent,
+    UserinfoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { DebtComponent } from './debt/debt.component';
     FlexLayoutModule,
     FormsModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    NoConflictStyleCompatibilityMode
   ],
   providers: [AuthenticationService, UserService, NavbarService],
   entryComponents: [LoginComponent],

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private dialogRef: MdDialogRef<LoginComponent>,
               private authenticationService: AuthenticationService,
-              private router: Router) {
+              private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.model.email, this.model.password)
       .subscribe(
         data => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home'], { relativeTo: this.route });
           this.dialogRef.close();
           console.log(localStorage.getItem('currentUser'));
         },
@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit {
           this.errorMessage = 'Registration Successful';
           this.registration = false;
           this.signin = true;
+          this.loading = false;
         },
         error => {
           this.error = true;

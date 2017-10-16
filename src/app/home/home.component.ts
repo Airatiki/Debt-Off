@@ -9,9 +9,20 @@ import {NavbarService} from '../services/navbar.service';
   styleUrls: ['./home.component.css'],
   providers: [NavbarService ]
 })
+
+
 export class HomeComponent implements OnInit {
+  userok = {'info':
+    {'id': 4,
+      'firstName': 'Airat',
+      'lastName': 'Bikbaev',
+      'userName': 'airatiki1488',
+      'email': 'bikbaev.airat@gmail.com',
+      'avatarUri': 'https://www.gravatar.com/avatar/1cdfa19b0e8fb34ced5bb33dce46e30b.jpg?d=identicon'},
+    'requisites': []};
 
   user: any = {};
+  isUser = false;
   constructor(private userservice: UserService, public nav: NavbarService) { }
 
   ngOnInit() {
@@ -25,8 +36,10 @@ export class HomeComponent implements OnInit {
   load() {
     return this.userservice.getUserSelf().map(
       data => {
+        console.log(data);
+        this.user = data.json();
+        this.isUser = true;
         console.log(this.user);
-        this.user = data;
       },
       error => {
 
