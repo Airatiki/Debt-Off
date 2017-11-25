@@ -1,0 +1,52 @@
+$lt-gray: #ddd;
+$background-dark: #512DA8;
+$background-light: #9575CD;
+$background-pale: #D1C4E9;
+$accent-color:         #FFC107;
+$yellow: #FFEB3B;
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+  margin: 0px auto;
+  padding: $pad-up-down $pad-left-right;
+}
+
+.jumbotron {
+@include zero-margin(70px,30px);
+  background: $accent-color ;
+  color:floralwhite;
+  min-height: 150px;
+}
+
+.back{
+  background: $yellow;
+  position: fixed;
+}
+p, h1 {
+  color: black;
+  text-shadow: 1px 1px 2px white, 0 0 25px $yellow, 0 0 5px darkblue;
+}
+
+
+.myBackdrop {
+  background: red;
+}
+
+.myClass .mat-dialog-container {
+  background: red;
+}
+
+
+
+
+.hero-section.centered {
+  padding-top: 127%;
+  padding-bottom: 100%;
+  /*border-bottom: 4px solid #69b9ff;*/
+  /*background-image: url('../assets/ttt.png');*/
+  background-image: url("../../assets/mak.jpg");
+  //background-image: -webkit-linear-gradient(270deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../../assets/mak.jpg');
+  //background-image: linear-gradient(180deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../../assets/mak.jpg');
+  background-position: 50% 50%, 0% 0%;
+  background-size: auto, cover;
+  text-align: center;
+}

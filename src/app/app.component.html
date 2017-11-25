@@ -1,0 +1,19 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!--<app-header></app-header>-->
+<!--<app-debts></app-debts>-->
+<!--<app-header></app-header>-->
+<router-outlet *ngIf="!navbar"></router-outlet>
+<div *ngIf="navbar" class='container-fluid'>
+  <div class='row'>
+    <div class='col-sm-3'>
+      <app-home></app-home>
+    </div>
+    <div class='col-sm-9 body-content'>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!--<app-home *ngIf="navbar"></app-home>-->
+<!--<router-outlet></router-outlet>-->
+

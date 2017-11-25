@@ -1,0 +1,47 @@
+<div *ngIf="nav.visible && isUser" class='main-nav'>
+  <div class='navbar navbar-inverse'>
+    <div class='navbar-header'>
+      <div fxFlex>
+        <h1>Debt'off</h1>
+        <mat-list >
+          <mat-list-item style="color: wheat">
+            <img mat-list-avatar src={{user.info.avatarUri}}>
+            <h4  mat-line>{{user.info.firstName}}</h4>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <!--<p *ngIf="token">{{}}</p>-->
+    </div>
+    <div class='clearfix'></div>
+    <div class='navbar-collapse collapse'>
+      <ul class='nav navbar-nav'>
+        <li routerLinkActive="link-active">
+          <a [routerLink]="['/home/debts']">
+            <span class='glyphicon glyphicon-home'></span> Debts
+          </a>
+        </li>
+        <li routerLinkActive="link-active">
+          <a routerLink="/home/search">
+            <span class='glyphicon glyphicon-education'></span> Search
+          </a>
+        </li>
+        <li routerLinkActive="link-active">
+          <a [routerLink]="['/home/communities']">
+            <span class='glyphicon glyphicon-th-list'></span> Communities
+          </a>
+        </li>
+        <li routerLinkActive="link-active">
+          <a [routerLink]="['/home/notifications']">
+            <span class='glyphicon glyphicon-th-list'></span> Notifications
+          </a>
+        </li>
+        <li routerLinkActive="link-active">
+          <a (click)="logout()" [routerLink]="['/header']">
+            <span class='glyphicon glyphicon-th-large'></span> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--<router-outlet></router-outlet>-->

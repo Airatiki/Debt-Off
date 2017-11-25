@@ -1,0 +1,85 @@
+<div class="container flex-spacer"
+     fxLayout="row"
+     fxLayout.sm="column"
+     fxLayout.xs="column"
+     fxLayoutAlign.gt-md="space-around center"
+     fxLayoutGap="10px">
+
+
+  <div fxFlex="40%" class="example-container mat-elevation-z8">
+    <h3>History,  Total Amount: {{database.totalAmount}} </h3>
+
+    <mat-table  #table [dataSource]="dataSource">
+      <ng-container matColumnDef="Description">
+        <mat-header-cell *matHeaderCellDef > Description </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef > Date </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.time}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Amount">
+        <mat-header-cell *matHeaderCellDef > Amount </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.amount}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+                   [length]="database.data.length"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+
+
+
+<div *ngIf="isUser" fxFlex="40%" >
+  <mat-card >
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>
+        <h3>{{user.info.firstName}}</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <img mat-card-image class="imgProfil" src={{user.info.avatarUri}} >
+    <mat-card-content>
+      <p>UserName: {{user.info.userName}}</p>
+      <p>Email: {{user.info.email}}</p>
+
+      <button mat-button (click)="addDebt()" class="addButton" *ngIf="showAddButton">Add Debt</button>
+
+      <form novalidate [formGroup]="debtForm" (ngSubmit)="onSubmit()" *ngIf="formCreated" >
+        <p>
+          <mat-input-container class="half-width"
+                              dividerColor="{{formErrors.description ? 'warn' : 'primary'}}" >
+            <input matInput formControlName="description" placeholder="Description" type="text" required>
+            <mat-hint>
+              <span [hidden]="!(formErrors.description)">{{formErrors.description}}</span>
+            </mat-hint>
+          </mat-input-container>
+          <mat-input-container class="half-width"  dividerColor="{{formErrors.amount ? 'warn' : 'primary'}}">
+            <input matInput formControlName="amount" placeholder="Amount" type="number" pattern="[0-9]*" required>
+            <mat-hint>
+              <span [hidden]="!(formErrors.amount)">{{formErrors.amount}}</span>
+            </mat-hint>
+          </mat-input-container>
+        </p>
+        <button type="submit" mat-button class="background-primary text-floral-white" [disabled] = "debtForm.invalid">Send</button>
+        <button mat-button class="background-primary text-floral-white" (click)="cancelButton()">Cancel</button>
+      </form>
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+
+
+
