@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '@angular/material';
@@ -19,6 +19,11 @@ import { HomeComponent } from './home/home.component';
 import { DebtComponent } from './debt/debt.component';
 import {NoConflictStyleCompatibilityMode} from '@angular/material';
 import { UserinfoComponent } from './userinfo/userinfo.component';
+import { SearchComponent } from './search/search.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { CommunityComponent } from './community/community.component';
+import { CommunityinfoComponent } from './communityinfo/communityinfo.component';
+import { NotificationComponent } from './notification/notification.component';
 
 
 @NgModule({
@@ -28,7 +33,11 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
     LoginComponent,
     HomeComponent,
     DebtComponent,
-    UserinfoComponent
+    UserinfoComponent,
+    SearchComponent,
+    CommunityComponent,
+    CommunityinfoComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +47,10 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
     FormsModule,
     AppRoutingModule,
     HttpModule,
-    NoConflictStyleCompatibilityMode
+    NoConflictStyleCompatibilityMode,
+    ReactiveFormsModule
   ],
-  providers: [AuthenticationService, UserService, NavbarService],
+  providers: [AuthenticationService, UserService, NavbarService, {provide: LOCALE_ID, useValue: 'ru'}],
   entryComponents: [LoginComponent],
   bootstrap: [AppComponent]
 })

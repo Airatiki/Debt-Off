@@ -26,6 +26,12 @@ export class HomeComponent implements OnInit {
   constructor(private userservice: UserService, public nav: NavbarService) { }
 
   ngOnInit() {
+    if (window.location.href.indexOf('token') !== -1) {
+      const equalSign = window.location.href.indexOf('=');
+      console.log(window.location.href.substring(equalSign + 1, window.location.href.length));
+      localStorage.setItem('currentUser', window.location.href.substring(equalSign + 1, window.location.href.length));
+      console.log(window.location.href);
+    }
     this.load().subscribe(_ => {
       console.log(this.user);
     });
@@ -51,6 +57,7 @@ export class HomeComponent implements OnInit {
   logout() {
     localStorage.removeItem('currentUser');
     console.log(localStorage.getItem('currentUser'));
+    // location.href = 'localhost:4200/header';
   }
 
 }

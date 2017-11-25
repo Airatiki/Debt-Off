@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  navbar = false;
+
+  constructor(public router: Router) {
+    router.events.subscribe((url: any) => {
+      console.log(router.url);
+      router.url === '/header' ? this.navbar = false : this.navbar = true;
+      console.log(this.navbar);
+    });
+    // console.log(router.url);
+  }
 }

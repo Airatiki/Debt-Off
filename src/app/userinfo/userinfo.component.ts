@@ -6,6 +6,8 @@ import {MdPaginator} from '@angular/material';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Debt} from '../shared/Debt';
 
 @Component({
   selector: 'app-userinfo',
@@ -13,12 +15,33 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
   styleUrls: ['./userinfo.component.css']
 })
 export class UserinfoComponent implements OnInit {
+  submition = true;
+  showAddButton = true;
+  formCreated = false;
+  debtForm: FormGroup;
+  debt: Debt;
+  formErrors = {
+    'description': '',
+    'amount': '',
+  };
+
+  validationMessages = {
+    'description': {
+      'required': 'Description is required.',
+      'minlength': 'Description must be at least 2 ch long',
+      'maxlength': 'Description must be less than 25 ch long'
+    },
+    'amount': {
+      'required': 'amount is required.',
+      'pattern': 'amount must be contain only numbers'
+    }
+  };
   displayedColumns = ['Description', 'Date', 'Amount'];
   database: any;
   dataSource: ExampleDataSource | null;
   @ViewChild(MdPaginator) paginator: MdPaginator;
 
-  constructor(private route: ActivatedRoute, private userservice: UserService) { }
+  constructor(private route: ActivatedRoute, private userservice: UserService, private fb: FormBuilder) { }
   user: any = {};
   isUser = false;
   ngOnInit() {
@@ -29,18 +52,72 @@ export class UserinfoComponent implements OnInit {
       this.userservice.getUserInfo(params['id']).subscribe(data => {
         this.user = data.json();
         this.isUser = true;
-        console.log(this.user);
+        console.log('HUILOOO', this.user);
       });
       console.log(params['id'], 'petuh');
       return params['id'];
     }).subscribe(_ => {});
     console.log(this.user);
   }
+  addDebt() {
+    this.createForm();
+    this.showAddButton = false;
+    console.log('kek');
+  }
+  createForm() {
+    this.formCreated = true;
+    this.debtForm = this.fb.group({
+      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+      amount: ['', [Validators.required, Validators.pattern]]
+    });
 
+    this.debtForm.valueChanges.subscribe(data => this.onValueChanged(data));
+
+    this.onValueChanged();
+  }
+  onValueChanged(data?: any) {
+    if (!this.debtForm) { return; }
+    const form = this.debtForm;
+
+    for (const field in this.formErrors) {
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  onSubmit() {
+    this.debt = this.debtForm.value;
+    this.submition = false;
+    this.userservice.createDebt(this.user.info.id, this.debt.description, this.debt.amount)
+      .subscribe(response => {
+        console.log(response);
+      },
+        error => {
+        console.log(error);
+        });
+
+    this.debtForm.reset({
+      description: '',
+      amount: ''
+    });
+  }
+
+  cancelButton() {
+    this.formCreated = false;
+    this.showAddButton = true;
+
+  }
 }
 
 let lolans: any = {};
 export class ExampleDatabase {
+  totalAmount = 0;
   /** Stream that emits whenever the data has been modified. */
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   get data(): any[] { return this.dataChange.value; }
@@ -59,19 +136,28 @@ export class ExampleDatabase {
       return params['id'];
     }).subscribe(_ => {});
     console.log(this.user);
-    // console.log(loans);
-    // this.isCredit ? this.addCredits() : this.addDebts();
   }
 
   addDebts(user) {
 
-    console.log('SUCHARA');
+
+    // console.log(user.credits.map(user.debts));
+
+    console.log('SUCHARA--------', user);
     for (let i = 0; i < user.credits.length; i++){
+      this.totalAmount += user.credits[i].amount;
+      const date = new Date(user.credits[i].time);
+      const hours = date.getHours() + ':' + date.getMinutes();
+      user.credits[i].time = date.toDateString() + ' ' + hours;
       const copiedData = this.data.slice();
       copiedData.push(this.createNewUser(user.credits[i], 'green'));
       this.dataChange.next(copiedData);
     }
     for ( let i = 0; i < user.debts.length; i++) {
+      this.totalAmount -= user.debts[i].amount;
+      const date = new Date(user.debts[i].time);
+      const hours = date.getHours() + ':' + date.getMinutes();
+      user.debts[i].time = date.toDateString() + ' ' + hours;
       const copiedData = this.data.slice();
       copiedData.push(this.createNewUser(user.debts[i], 'red'));
       this.dataChange.next(copiedData);
@@ -118,5 +204,6 @@ export class ExampleDataSource extends DataSource<any> {
   }
 
   disconnect() {}
+
 }
 

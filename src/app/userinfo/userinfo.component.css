@@ -3,3 +3,7 @@
   height: 100px;
   /*overflow: hidden;*/
 }
+
+.addButton {
+  background: lightgray;
+}

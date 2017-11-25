@@ -1,0 +1,15 @@
+<div fxFlex="30%" class="community">
+    <div *ngIf="users" class="form-group">
+      <label for="user">Name:</label>
+      <select class="form-control" name="user" [(ngModel)]="selectedUser" (ngModelChange)="onChangeUser($event)" required>
+        <option *ngFor="let user of users" [ngValue]="user" > {{user.userName}} </option>
+      </select>
+    </div>
+
+    <div *ngIf="communities" class="form-group">
+      <label for="communities">Join communities</label>
+      <select class="form-control" name="community" [(ngModel)]="selectedCommunity" (ngModelChange)="onChangeCommunity($event)" required>
+        <option *ngFor="let community of communities" [ngValue]="community" > {{community.name}} </option>
+      </select>
+    </div>
+</div>

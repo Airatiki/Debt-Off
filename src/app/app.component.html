@@ -2,29 +2,18 @@
 <!--<app-header></app-header>-->
 <!--<app-debts></app-debts>-->
 <!--<app-header></app-header>-->
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!navbar"></router-outlet>
+<div *ngIf="navbar" class='container-fluid'>
+  <div class='row'>
+    <div class='col-sm-3'>
+      <app-home></app-home>
+    </div>
+    <div class='col-sm-9 body-content'>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
 
-<!--<div class="centered hero-section">-->
+<!--<app-home *ngIf="navbar"></app-home>-->
+<!--<router-outlet></router-outlet>-->
 
-<!--</div>-->
-
-
-
-
-<!--<div fxFlex="20" >-->
-  <!--<md-card class="flex-spacer">-->
-    <!--<md-card-header>-->
-      <!--<div md-card-avatar></div>-->
-      <!--<md-card-title>-->
-        <!--<h3>AIRAT</h3>-->
-      <!--</md-card-title>-->
-    <!--</md-card-header>-->
-    <!--<img md-card-image src="assets/leader.jpg" >-->
-    <!--<md-card-content>-->
-      <!--<p>C203 team</p>-->
-      <!--<p>LolKEK</p>-->
-      <!--<p>Cheburek-->
-      <!--</p>-->
-    <!--</md-card-content>-->
-  <!--</md-card>-->
-<!--</div>-->

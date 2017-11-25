@@ -39,12 +39,13 @@ p, h1 {
 
 
 .hero-section.centered {
-  padding-top: 100%;
-  padding-bottom: 300%;
+  padding-top: 127%;
+  padding-bottom: 100%;
   /*border-bottom: 4px solid #69b9ff;*/
   /*background-image: url('../assets/ttt.png');*/
-  background-image: -webkit-linear-gradient(270deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../../assets/ttt.png');
-  background-image: linear-gradient(180deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../../assets/ttt.png');
+  background-image: url("../../assets/mak.jpg");
+  //background-image: -webkit-linear-gradient(270deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../../assets/mak.jpg');
+  //background-image: linear-gradient(180deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../../assets/mak.jpg');
   background-position: 50% 50%, 0% 0%;
   background-size: auto, cover;
   text-align: center;

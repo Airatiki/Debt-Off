@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {LoginComponent} from '../login/login.component';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,10 @@ export class HeaderComponent implements OnInit {
       backdropClass: 'myBackdrop',
       panelClass: 'myClass',
       width: '500px'});
+  }
+  vkReg() {
+    window.location.href = 'http://debtoff.azurewebsites.net/api/account/authenticate?state=http%3A%2F%2Flocalhost%3A4200%2Fhome';
+
   }
 
 }

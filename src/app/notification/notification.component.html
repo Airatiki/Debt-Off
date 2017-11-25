@@ -1,0 +1,8 @@
+<div fxFlex="30%" class="community">
+  <div class="form-group">
+    <label for="notifications">My notifications:</label>
+    <select class="form-control" name="notification" [(ngModel)]="selectedNotification" (ngModelChange)="onChange($event)" required>
+      <option *ngFor="let not of notifications" [ngValue]="not" > CreditorId:{{not.creditorId}} {{not.description}} </option>
+    </select>
+  </div>
+</div>

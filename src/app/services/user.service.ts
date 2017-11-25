@@ -21,9 +21,74 @@ export class UserService {
     return this.http.get('https://debtoff.azurewebsites.net/api/user/' + id, this.jwt());
   }
 
+  getUsers() {
+    return this.http.get('https://debtoff.azurewebsites.net/api/user/search', this.jwt());
+  }
+
+  getCommunityInfo(id) {
+    return this.http.get('https://debtoff.azurewebsites.net/api/community/' + id, this.jwt());
+  }
+  getCommunities() {
+    return this.http.get('https://debtoff.azurewebsites.net/api/community', this.jwt());
+  }
+  getNotifications() {
+    return this.http.get('https://debtoff.azurewebsites.net/api/invoice/user', this.jwt());
+  }
+  acceptInvoice(id: number) {
+    return this.http.post('https://debtoff.azurewebsites.net/api/invoice/accept/' + id,
+      this.jwt()).map((response: Response) => {
+      console.log(response);
+    });
+  }
+
+  searchCommunities() {
+    return this.http.get('https://debtoff.azurewebsites.net/api/community/search', this.jwt());
+  }
+  joinCommunity(id: number) {
+    return this.http.post('https://debtoff.azurewebsites.net/api/community/' + id + '/join',
+      this.jwt()).map((response: Response) => {
+      console.log(response);
+    });
+  }
+  optimizeCommunity(id: number) {
+    return this.http.post('https://debtoff.azurewebsites.net/api/community/' + id + '/optimize',
+      this.jwt()).map((response: Response) => {
+      console.log(response);
+    });
+  }
+  createCommunity(name: string) {
+    return this.http.post('https://debtoff.azurewebsites.net/api/community',
+      JSON.stringify({name: name}),
+      this.postJWT()).map((response: Response) => {
+      console.log(response);
+    });
+  }
 
 
+  createDebt(creditorId: number, description: string, amount: number) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const headers = new Headers({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + currentUser});
+      const options = new RequestOptions({headers: headers});
+      return this.http.post('https://debtoff.azurewebsites.net/api/loan/user/' + creditorId,
+        JSON.stringify({description: description, amount: amount, time: (new Date()).toISOString()}),
+        options)
+        .map((response: Response) => {
+          // login successful if there's a jwt token in the response
+          // const user = response.json();
+          // console.log(user);
+          console.log(response);
+        });
+    }
+  }
 
+  private postJWT() {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const headers = new Headers({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + currentUser});
+      return new RequestOptions({headers: headers});
+    }
+  }
 
   private jwt() {
     // create authorization header with jwt token

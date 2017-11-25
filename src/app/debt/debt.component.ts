@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -30,13 +31,10 @@ export class DebtComponent implements OnInit {
 
   @ViewChild(MdPaginator) paginator: MdPaginator;
   @ViewChild('debtsPaginator') debtsPaginator: MdPaginator;
-  // @ViewChild(MdPaginator) debtsPaginator: MdPaginator;
-  totalCreditsAmount: number;
   totalDebtsAmount: number;
-  kek: number;
-  model: any = {};
+  totalCreditsAmount: number;
 
-  constructor(public nav: NavbarService, private userservice: UserService ) { }
+  constructor(public nav: NavbarService, private userservice: UserService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit() {
     this.debtsDatabase = new ExampleDatabase(this.userservice, false);
@@ -45,46 +43,27 @@ export class DebtComponent implements OnInit {
 
     this.creditsDatabase = new ExampleDatabase(this.userservice, true);
     this.dataCredits = new ExampleDataSource(this.creditsDatabase, this.paginator);
-    this.kek  = 100;
-    // console.log(this.debts.credits[0].user);
-    // this.getSummary().subscribe( _ => {
-    //   console.log(this.model);
-    //   this.totalCreditsAmount = 0;
-    //   this.totalDebtsAmount = 0;
-    //   lolans.debts.forEach(item => this.totalDebtsAmount += item.totalAmount);
-    //   lolans.credits.forEach(item => this.totalCreditsAmount += item.totalAmount);
-    // });
-    console.log('NGONINIT');
-
-    console.log('pidrila');
+    this.totalCreditsAmount  = 151;
+    this.totalDebtsAmount = 1404;
     console.log(loans);
 
-    // this.nav.show();
   }
 
-  // getSummary() {
-  //   return this.userservice.getUserSummary().map(
-  //     data => {
-  //       console.log(data);
-  //       this.model = data;
-  //       loans = data.json();
-  //       console.log('LOANS DOWNLOADED');
-  //       console.log(loans);
-  //     },
-  //     error => {
-  //
-  //     }
-  //   );
-  // }
+  onUserClick(user) {
+    // console.log(user);
+    this.router.navigate(['/home/userinfo/' + user.id], { relativeTo: this.route });
+  }
 
 }
 
 let loans: any = {};
-let lolans: any = {};
+let totalDebtsAmountans: any = {};
 
 
 export class ExampleDatabase {
   /** Stream that emits whenever the data has been modified. */
+  totalDebts = 0;
+  totalCredits = 0;
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   get data(): any[] { return this.dataChange.value; }
 
@@ -95,12 +74,15 @@ export class ExampleDatabase {
   }
 
   addDebts() {
-    console.log('SUCHARA');
     this.userservice.getUserSummary().subscribe(data => {
-      lolans = data.json();
-      for (let i = 0; i < lolans.debts.length; i++) {
+      totalDebtsAmountans = data.json();
+      this.totalDebts = totalDebtsAmountans.debts.reduce((total, {totalAmount}) => total += totalAmount, 0);;
+      for (let i = 0; i < totalDebtsAmountans.debts.length; i++) {
+        const date = new Date(totalDebtsAmountans.debts[i].time);
+        const hours = date.getHours() + ':' + date.getMinutes();
+        totalDebtsAmountans.debts[i].time = date.toDateString() + ' ' + hours;
         const copiedData = this.data.slice();
-        copiedData.push(lolans.debts[i]);
+        copiedData.push(totalDebtsAmountans.debts[i]);
         this.dataChange.next(copiedData);
       }
     });
@@ -109,12 +91,16 @@ export class ExampleDatabase {
   /** Adds a new user to the database. */
   // TODO: Add error checking
   addCredits() {
-    console.log('SUCHARA');
     this.userservice.getUserSummary().subscribe(data => {
-      lolans = data.json();
-      for (let i = 0; i < lolans.credits.length; i++) {
+      totalDebtsAmountans = data.json();
+      this.totalCredits = totalDebtsAmountans.credits.reduce((total, {totalAmount}) => total += totalAmount, 0);
+      console.log(totalDebtsAmountans.credits.totalAmount);
+      for (let i = 0; i < totalDebtsAmountans.credits.length; i++) {
+        const date = new Date(totalDebtsAmountans.credits[i].time);
+        const hours = date.getHours() + ':' + date.getMinutes();
+        totalDebtsAmountans.credits[i].time = date.toDateString() + ' ' + hours;
         const copiedData = this.data.slice();
-        copiedData.push(lolans.credits[i]);
+        copiedData.push(totalDebtsAmountans.credits[i]);
         this.dataChange.next(copiedData);
       }
     });

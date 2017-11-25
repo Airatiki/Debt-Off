@@ -15,23 +15,28 @@
     <div class='clearfix'></div>
     <div class='navbar-collapse collapse'>
       <ul class='nav navbar-nav'>
-        <li [routerLinkActive]="['active']">
+        <li routerLinkActive="link-active">
           <a [routerLink]="['/home/debts']">
             <span class='glyphicon glyphicon-home'></span> Debts
           </a>
         </li>
-        <li routerLinkActive="active">
-          <a routerLink="/counter">
-            <span class='glyphicon glyphicon-education'></span> Communities
+        <li routerLinkActive="link-active">
+          <a routerLink="/home/search">
+            <span class='glyphicon glyphicon-education'></span> Search
           </a>
         </li>
         <li routerLinkActive="link-active">
-          <a routerLink="/fetch-data">
-            <span class='glyphicon glyphicon-th-list'></span> Settings
+          <a [routerLink]="['/home/communities']">
+            <span class='glyphicon glyphicon-th-list'></span> Communities
           </a>
         </li>
         <li routerLinkActive="link-active">
-          <a (click)="logout()" routerLink="/header">
+          <a [routerLink]="['/home/notifications']">
+            <span class='glyphicon glyphicon-th-list'></span> Notifications
+          </a>
+        </li>
+        <li routerLinkActive="link-active">
+          <a (click)="logout()" [routerLink]="['/header']">
             <span class='glyphicon glyphicon-th-large'></span> Logout
           </a>
         </li>
@@ -39,4 +44,4 @@
     </div>
   </div>
 </div>
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet>-->
