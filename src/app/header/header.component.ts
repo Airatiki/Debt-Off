@@ -22,7 +22,8 @@ export class HeaderComponent implements OnInit {
   }
   vkReg() {
     // window.location.href = 'http://debtoff.azurewebsites.net/api/account/authenticate?state=http%3A%2F%2Flocalhost%3A4200%2Fhome';
-    window.location.href = 'http://debtoff.azurewebsites.net/api/account/authenticate?state=https%3A%2F%2Fairatiki.github.io%2FDebt-Off%2Fhome';
+    window.location.href = 'http://debtoff.azurewebsites.net/api/account/' +
+      'authenticate?state=https%3A%2F%2Fairatiki.github.io%2FDebt-Off%2Fhome';
 
   }
 
