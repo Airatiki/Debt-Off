@@ -1,0 +1,117 @@
+<div class="container flex-spacer"
+     fxLayout="column"
+     fxLayout.sm="column"
+     fxLayout.xs="column"
+     fxLayoutAlign.gt-md="space-around center"
+     fxLayoutGap="10px">
+
+
+<div  class="example-container mat-elevation-z8">
+  <!--<h3>CREDITS, <span class="total">{{totalCreditsAmount}}</span></h3>-->
+  <div class="preview-title">
+    CREDITS
+    <span>Total:<strong>{{creditsDatabase.totalCredits | currency:'RUB':'symbol'}}</strong></span>
+  </div>
+  <!--//,  Total Amount: {{totalCreditsAmount}}-->
+
+  <mat-table  #table [dataSource]="dataCredits">
+
+    <ng-container matColumnDef="avatar">
+      <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+      <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}}> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> UserName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.userName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FirstName">
+      <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="LastName">
+      <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span automation-id="price" class="badge badge-success">{{row.totalAmount | currency:'RUB':'symbol'}}</span>
+        <!--{{row.totalAmount}} -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserClick(row.user, $event)"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 id="creditsPaginator"
+                 [length]="creditsDatabase.data.length"
+                 [pageIndex]="0"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
+
+
+
+
+
+
+<div  class="example-container mat-elevation-z8">
+  <div class="preview-title">
+    DEBTS
+    <span>Total:<strong>{{debtsDatabase.totalDebts | currency:'RUB':'symbol'}}</strong></span>
+  </div>
+  <!--,  Total Amount: {{totalDebtsAmount}}-->
+
+  <mat-table #tabl [dataSource]="dataDebts">
+
+    <ng-container matColumnDef="avatar">
+      <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+      <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}}> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> UserName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.userName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FirstName">
+      <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="LastName">
+      <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span automation-id="price" class="badge badge-danger">{{row.totalAmount | currency:'RUB':'symbol'}}</span>
+        <!--{{row.totalAmount}} -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserClick(row.user, $event)"></mat-row>
+  </mat-table>
+
+  <mat-paginator #debtsPaginator
+                 id="debtsPaginator"
+                 [length]="debtsDatabase.data.length"
+                 [pageIndex]="0"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
+</div>
+

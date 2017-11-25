@@ -1,0 +1,24 @@
+ <div fxFlex="30%" class="community">
+    <div class="form-group">
+      <label for="communities">My communities:</label>
+      <select class="form-control" name="user" [(ngModel)]="selectedCommunity" (ngModelChange)="onChange($event)" required>
+        <option *ngFor="let community of communities" [ngValue]="community" > {{community.name}} </option>
+      </select>
+    </div>
+     <button mat-button class="addButton" *ngIf="showCreateButton" (click)="createCommunity()">Create community</button>
+   <form novalidate [formGroup]="communityForm" (ngSubmit)="onSubmit()" *ngIf="formCreated" >
+     <p>
+       <mat-input-container class="half-width"
+                            dividerColor="{{formErrors.name ? 'warn' : 'primary'}}" >
+         <input matInput formControlName="name" placeholder="name" type="text" required>
+         <mat-hint>
+           <span [hidden]="!(formErrors.name)">{{formErrors.name}}</span>
+         </mat-hint>
+       </mat-input-container>
+     </p>
+     <button type="submit" mat-button class="background-primary text-floral-white" [disabled] = "communityForm.invalid">Create</button>
+     <button mat-button class="background-primary text-floral-white" (click)="cancelButton()">Cancel</button>
+   </form>
+ </div>
+
+
