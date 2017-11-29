@@ -1,10 +1,9 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-search',
@@ -12,52 +11,45 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-
-  communities: any[];
-  users: any[];
-  selectedUser: Object = {};
-  selectedCommunity: Object = {};
+  searching = [
+    {value: 'Users', viewValue: 'Users'},
+    {value: 'Communities', viewValue: 'Communities'}
+  ];
+  isUserShown = true;
+  resultsUser: any[];
+  resultsCommunity: any[];
+  searchTerm$ = new Subject<string>();
 
   constructor(private userservice: UserService, private router: Router, private route: ActivatedRoute) {
+    this.userservice.searchUsers(this.searchTerm$).subscribe(results => this.resultsUser = results.users);
   }
 
   ngOnInit() {
-    this.getUsers();
-    this.getCommunities();
+
   }
 
-  getUsers() {
-    this.userservice.getUsers()
-      .subscribe(data => {
-        this.users = data.json().users;
-        console.log(this.users);
-      }, error => {
-        console.log(error);
-      });
-  }
-
-  getCommunities() {
-    this.userservice.searchCommunities()
-      .subscribe(data => {
-        this.communities = data.json().communities;
-        console.log(this.users);
-      }, error => {
-        console.log(error);
-      });
-  }
-
-  onChangeUser(user) {
+  onUserClick(user) {
     this.router.navigate(['/home/userinfo/' + user.id], { relativeTo: this.route });
   }
 
-  onChangeCommunity(community) {
-    this.userservice.joinCommunity(community.id).subscribe(data => {
-      console.log(data);
-      this.router.navigate(['/home/communityinfo/' + community.id], { relativeTo: this.route });
-    },
-      error => {
-      console.log(error);
-      });
+  onCommunityClick(community) {
+    this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`], { relativeTo: this.route });
+  }
+
+  onSelectChange(target) {
+    this.searchTerm$.complete();
+    this.searchTerm$ = new Subject<string>();
+    this.toggle();
+
+    if (target === this.searching[0].value) {
+      this.userservice.searchUsers(this.searchTerm$).subscribe(results => this.resultsUser = results.users);
+    } else {
+      this.userservice.searchCommunity(this.searchTerm$).subscribe(results => this.resultsCommunity = results.communities);
+    }
+  }
+
+  toggle() {
+    this.isUserShown = !this.isUserShown;
   }
 
 }

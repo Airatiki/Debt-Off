@@ -30,6 +30,7 @@ export class NotificationComponent implements OnInit {
 
   onChange(notification) {
     this.userservice.acceptInvoice(notification.id).subscribe(response => {
+      console.log('ALAAAAAn');
         this.router.navigate(['home/userinfo/' + notification.creditorId], { relativeTo: this.route });
       },
       error => {

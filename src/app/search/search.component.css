@@ -1,9 +1,23 @@
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+/*.example-form {*/
+  /*min-width: 150px;*/
+  /*max-width: 500px;*/
+  /*width: 100%;*/
+/*}*/
+
+.example-full-width {
   width: 100%;
 }
 
-.example-full-width {
+
+
+i {  vertical-align: middle; }
+.table-users tbody tr:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+.nav-user-photo {
+  vertical-align: middle;
+}
+.user_panel {
   width: 100%;
 }

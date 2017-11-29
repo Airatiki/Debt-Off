@@ -69,7 +69,7 @@ export class CommunityComponent implements OnInit {
   }
 
   onChange(community) {
-    this.router.navigate(['/home/communityinfo/' + community.id], { relativeTo: this.route });
+    this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`], { relativeTo: this.route });
   }
   createCommunity() {
     this.createForm();

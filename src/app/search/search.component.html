@@ -1,15 +1,84 @@
-<div fxFlex="30%" class="community">
-    <div *ngIf="users" class="form-group">
-      <label for="user">Name:</label>
-      <select class="form-control" name="user" [(ngModel)]="selectedUser" (ngModelChange)="onChangeUser($event)" required>
-        <option *ngFor="let user of users" [ngValue]="user" > {{user.userName}} </option>
-      </select>
+
+<mat-input-container>
+  <input matInput placeholder="Search" (keyup)="searchTerm$.next($event.target.value)">
+</mat-input-container>
+
+<mat-select placeholder="Search by ..." [value]="searching[0].value" (valueChange)="onSelectChange($event)">
+  <mat-option *ngFor="let search of searching" [value]="search.value">
+    {{ search.viewValue }}
+  </mat-option>
+</mat-select>
+
+
+  <div class="container" *ngIf="resultsUser && isUserShown">
+    <div class="row">
+      <div class="panel panel-default user_panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">User List</h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-container">
+            <table class="table-users table" border="0">
+              <tbody>
+              <tr *ngIf="resultsUser.length === 0">
+                <td>
+                  Nothing to show...
+                </td>
+              </tr>
+              <tr *ngFor="let result of resultsUser" (click)="onUserClick(result)">
+                <td width="10">
+                  <img class="pull-left img-circle nav-user-photo" width="50" src="{{result.avatarUri}}" />  
+                </td>
+                <td>
+                  {{result.firstName}} {{result.lastName}}<br><i class="fa fa-envelope"></i>
+                </td>
+                <td align="center">
+                  {{result.userName}}<br><small class="text-muted">{{result.email}}</small>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+<div class="container" *ngIf="resultsCommunity && !isUserShown">
+  <div class="row">
+    <div class="panel panel-default user_panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Community List</h3>
+      </div>
+      <div class="panel-body">
+        <div class="table-container">
+          <table class="table-users table" border="0">
+            <tbody>
+            <tr *ngIf="resultsCommunity.length === 0">
+              <td>
+                Nothing to show...
+              </td>
+            </tr>
+            <tr *ngFor="let result of resultsCommunity" (click)="onCommunityClick(result)">
+              <td width="10">
+                <img class="pull-left img-circle nav-user-photo" width="50" src="../../assets/community.jpg" />  
+              </td>
+              <td>
+                {{result.name}}<br><i class="fa fa-envelope"></i>
+              </td>
+              <td align="center">
+                ID: {{result.id}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <div *ngIf="communities" class="form-group">
-      <label for="communities">Join communities</label>
-      <select class="form-control" name="community" [(ngModel)]="selectedCommunity" (ngModelChange)="onChangeCommunity($event)" required>
-        <option *ngFor="let community of communities" [ngValue]="community" > {{community.name}} </option>
-      </select>
-    </div>
+  </div>
 </div>
+
+

@@ -5,3 +5,26 @@
   width: 400px;
   height: 300px;
 }
+
+
+.crop {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+}
+
+.mat-header-row {
+  text-align: center;
+}
+
+.mat-cell {
+  text-align: center;
+}
+
+.mat-row {
+  cursor: pointer;
+}
+
+mat-card {
+  overflow: hidden;
+}

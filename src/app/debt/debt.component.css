@@ -49,6 +49,13 @@
 .mat-row {
   cursor: pointer;
 }
+.mat-header-row {
+  text-align: center;
+}
+
+.mat-cell {
+  text-align: center;
+}
 
 .badge {
   border-radius: 0.25rem;

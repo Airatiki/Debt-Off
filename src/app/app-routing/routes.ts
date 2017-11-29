@@ -17,6 +17,6 @@ export const routes: Routes = [
   {path: 'home/communities', component: CommunityComponent },
   {path: 'home/userinfo/:id', component: UserinfoComponent},
   {path: 'home/notifications', component: NotificationComponent},
-  {path: 'home/communityinfo/:id', component: CommunityinfoComponent},
+  {path: 'home/communityinfo/:id/:name', component: CommunityinfoComponent},
   {path: '', redirectTo: '/header', pathMatch: 'full'}
 ];

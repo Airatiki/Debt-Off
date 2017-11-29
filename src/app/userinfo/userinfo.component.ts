@@ -52,28 +52,25 @@ export class UserinfoComponent implements OnInit {
       this.userservice.getUserInfo(params['id']).subscribe(data => {
         this.user = data.json();
         this.isUser = true;
-        console.log('HUILOOO', this.user);
       });
-      console.log(params['id'], 'petuh');
       return params['id'];
-    }).subscribe(_ => {});
-    console.log(this.user);
+    }).subscribe(() => {});
+
+    this.createForm();
   }
   addDebt() {
-    this.createForm();
+    this.formCreated = true;
     this.showAddButton = false;
-    console.log('kek');
   }
   createForm() {
-    this.formCreated = true;
     this.debtForm = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-      amount: ['', [Validators.required, Validators.pattern]]
+      amount: ['', [Validators.required, Validators.pattern]],
+      agree: false
     });
 
     this.debtForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
-    this.onValueChanged();
   }
   onValueChanged(data?: any) {
     if (!this.debtForm) { return; }
@@ -92,15 +89,26 @@ export class UserinfoComponent implements OnInit {
   }
 
   onSubmit() {
+    const invoice = this.debtForm.value.agree;
+    console.log(this.debtForm.value.agree);
     this.debt = this.debtForm.value;
     this.submition = false;
-    this.userservice.createDebt(this.user.info.id, this.debt.description, this.debt.amount)
-      .subscribe(response => {
-        console.log(response);
-      },
-        error => {
-        console.log(error);
+
+    if (invoice) {
+      this.userservice.createInvoice(this.user.info.id, this.debt.description, this.debt.amount)
+        .subscribe(response => {
+          console.log(response);
         });
+
+    } else {
+      this.userservice.createDebt(this.user.info.id, this.debt.description, this.debt.amount)
+        .subscribe(response => {
+            console.log(response);
+          },
+          error => {
+            console.log(error);
+          });
+    }
 
     this.debtForm.reset({
       description: '',
@@ -111,11 +119,9 @@ export class UserinfoComponent implements OnInit {
   cancelButton() {
     this.formCreated = false;
     this.showAddButton = true;
-
   }
 }
 
-let lolans: any = {};
 export class ExampleDatabase {
   totalAmount = 0;
   /** Stream that emits whenever the data has been modified. */
@@ -123,55 +129,30 @@ export class ExampleDatabase {
   get data(): any[] { return this.dataChange.value; }
   user: any = {};
   constructor(private userservice: UserService, private route: ActivatedRoute) {
-    console.log('EXAMPLE START, LOANS ');
 
     this.route.params.switchMap((params: Params) => {
       this.userservice.getUserHistory(params['id']).subscribe(data => {
-        console.log('PIDRILA = ', data.json());
-        this.user = data.json();
-        this.addDebts(data.json());
-        console.log(this.user);
+        this.user = data;
+        this.addDebts(data);
       });
-      console.log(params['id'], 'petuh');
       return params['id'];
-    }).subscribe(_ => {});
-    console.log(this.user);
+    }).subscribe(() => {});
   }
 
-  addDebts(user) {
+  addDebts(userHistory) {
+    this.totalAmount = userHistory.reduce(function (total, {color, amount}) {
+      color === '#28a745' ? total += amount : total -= amount;
+      return total;
+    }, 0);
 
-
-    // console.log(user.credits.map(user.debts));
-
-    console.log('SUCHARA--------', user);
-    for (let i = 0; i < user.credits.length; i++){
-      this.totalAmount += user.credits[i].amount;
-      const date = new Date(user.credits[i].time);
+    userHistory.forEach(x => {
+      const date = new Date(x.time);
       const hours = date.getHours() + ':' + date.getMinutes();
-      user.credits[i].time = date.toDateString() + ' ' + hours;
+      x.time = date.toDateString() + ' ' + hours;
       const copiedData = this.data.slice();
-      copiedData.push(this.createNewUser(user.credits[i], 'green'));
+      copiedData.push(x);
       this.dataChange.next(copiedData);
-    }
-    for ( let i = 0; i < user.debts.length; i++) {
-      this.totalAmount -= user.debts[i].amount;
-      const date = new Date(user.debts[i].time);
-      const hours = date.getHours() + ':' + date.getMinutes();
-      user.debts[i].time = date.toDateString() + ' ' + hours;
-      const copiedData = this.data.slice();
-      copiedData.push(this.createNewUser(user.debts[i], 'red'));
-      this.dataChange.next(copiedData);
-    }
-  }
-
-  private createNewUser(item, color) {
-    console.log('MASHINA = ', item);
-    return {
-      time: item.time,
-      description: item.description,
-      amount: item.amount,
-      color: color
-    };
+    });
   }
 }
 
