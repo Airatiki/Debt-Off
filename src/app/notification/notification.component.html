@@ -1,8 +1,49 @@
-<div fxFlex="30%" class="community">
-  <div class="form-group">
-    <label for="notification">My notifications:</label>
-    <select class="form-control" name="notification" [(ngModel)]="selectedNotification" (ngModelChange)="onChange($event)" required>
-      <option *ngFor="let not of notifications" [ngValue]="not" > CreditorId:{{not.creditorId}} {{not.description}} </option>
-    </select>
+<!--<div fxFlex="30%" class="community">-->
+  <!--<div class="form-group">-->
+    <!--<label for="notification">My notifications:</label>-->
+    <!--<select class="form-control" name="notification" [(ngModel)]="selectedNotification" (ngModelChange)="onChange($event)" required>-->
+      <!--<option *ngFor="let not of notifications" [ngValue]="not" > CreditorId:{{not.creditorId}} {{not.description}} </option>-->
+    <!--</select>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+    <div class="row col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-2">
+    <div class="card">
+      <div class="card-header text-center" automation-id="title">
+        Invoices
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let notification of notifications; let i = index">
+          <div (click)="onClick(notification)"
+               class="d-flex justify-content-between align-items-center preview-title">
+            {{notification.creditorId}}
+            <span class="right">
+            <span class="badge badge-secondary" >{{notification.amount | currency:'RUB':'symbol'}}</span>
+            <button type="button" class="btn btn-success btn-xs" (click)="onAcceptInvoice(notification, $event)">Accept</button>
+            <button type="button" class="btn btn-danger btn-xs delete-btn" (click)="onDeclineInvoice(notification, $event)">Reject</button>
+            </span>
+          </div>
+          <div class="preview-body" *ngIf="notification.clicked">
+            <table class="details">
+              <tr>
+                <th>Описание:</th>
+                <td>{{notification.description}}</td>
+              </tr>
+              <tr>
+                <th>Дата:</th>
+                <td>{{notification.time | date:'longDate'}}</td>
+              </tr>
+            </table>
+          </div>
+        </li>
+      </ul>
+      <div class="card-footer text-center">
+        Общая задолженность: <strong>{{balance | currency:'RUB':'symbol'}}</strong>
+      </div>
+    </div>
+
   </div>
-</div>
+<!--</div>-->
+
+

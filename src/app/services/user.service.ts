@@ -47,6 +47,7 @@ export class UserService {
   searchCommunity(terms: Observable<string>) {
     return terms.debounceTime(400)
       .distinctUntilChanged()
+      .filter((str) => str.length > 0)
       .switchMap(term => this.searchEntries(term, 'community'));
   }
 
@@ -77,6 +78,12 @@ export class UserService {
   acceptInvoice(id: number) {
     console.log(this.jwt());
     return this.http.post(BASE_URL + '/invoice/accept/' + id, {},
+      this.jwt()).map((response: Response) => {
+      console.log(response);
+    });
+  }
+  declineInvoice(id: number) {
+    return this.http.post(BASE_URL + `/invoice/decline/${id}`, {},
       this.jwt()).map((response: Response) => {
       console.log(response);
     });

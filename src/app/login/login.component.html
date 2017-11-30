@@ -5,31 +5,6 @@
   <button mat-button mat-dialog-close>&times;</button>
 </mat-toolbar>
 
-<!--<p>{{user | json}}</p>-->
-<!--<form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">-->
-  <!--<mat-dialog-content>-->
-    <!--<p>-->
-      <!--<mat-input-container dividerColor="{{username.invalid && !username.pristine ? 'warn' : 'primary'}}">-->
-        <!--<input matInput placeholder="Username" type="text" [(ngModel)]="user.username" #username="ngModel" name="username" required>-->
-      <!--</mat-input-container>-->
-      <!--<mat-input-container dividerColor="{{password.invalid && !password.pristine ? 'warn' : 'primary'}}">-->
-        <!--<input matInput placeholder="Password" type="password" [(ngModel)]="user.password" #password="ngModel" name="password" required>-->
-      <!--</mat-input-container>-->
-      <!--<mat-checkbox [(ngModel)]="user.remember" name="remember">-->
-        <!--Remember me-->
-      <!--</mat-checkbox>-->
-    <!--</p>-->
-  <!--</mat-dialog-content>-->
-  <!--<mat-dialog-actions>-->
-    <!--<span class="flex-spacer"></span>-->
-    <!--<button mat-button mat-dialog-close>Cancel</button>-->
-    <!--<button type="submit" mat-button class="background-primary text-floral-white"-->
-            <!--[disabled]="loginForm.form.invalid">Login</button>-->
-  <!--</mat-dialog-actions>-->
-  <!--<a href="gooogle.com"> don't have an account yet</a>-->
-<!--</form>-->
-
-
 <div *ngIf="error" [ngClass]="{ 'alert-danger': 'error'}">{{errorMessage}}</div>
 
 

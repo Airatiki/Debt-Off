@@ -39,3 +39,9 @@
 .section-heading.centered.white {
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .body-content {
+    margin-top: 140px;
+  }
+}

@@ -1,12 +1,12 @@
-<div class="container flex-spacer"
-     fxLayout="row"
-     fxLayout.sm="column"
-     fxLayout.xs="column"
-     fxLayoutAlign.gt-md="space-around center"
-     fxLayoutGap="10px">
+<!--<div class="container"-->
+     <!--fxLayout="row"-->
+     <!--fxLayout.sm="column"-->
+     <!--fxLayout.xs="column"-->
+     <!--fxLayoutAlign.gt-md="space-around center"-->
+     <!--fxLayoutGap="10px">-->
+<div class="row">
 
-
-  <div fxFlex="40%" class="example-container mat-elevation-z8">
+  <div  class="mat-elevation-z8 col-md-5 col-md-push-1">
     <h3>History,  Total Amount: {{database.totalAmount}} </h3>
 
     <mat-table  #table [dataSource]="dataSource">
@@ -42,10 +42,9 @@
 
 
 
-<div *ngIf="isUser" fxFlex="40%" >
-  <mat-card >
-    <mat-card-header>
-      <div mat-card-avatar></div>
+<div *ngIf="isUser" class="col-md-4 col-md-push-2">
+  <mat-card class="user-info">
+    <mat-card-header class="title">
       <mat-card-title>
         <h3>{{user.info.firstName}}</h3>
       </mat-card-title>
@@ -82,8 +81,9 @@
     </mat-card-content>
   </mat-card>
 </div>
+<!--</div>-->
+
+
+
+
 </div>
-
-
-
-

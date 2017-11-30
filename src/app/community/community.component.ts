@@ -68,6 +68,10 @@ export class CommunityComponent implements OnInit {
       });
   }
 
+  onClickCommunity(community) {
+    this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`], { relativeTo: this.route });
+  }
+
   onChange(community) {
     this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`], { relativeTo: this.route });
   }

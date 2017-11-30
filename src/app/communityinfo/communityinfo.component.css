@@ -2,8 +2,8 @@
   background: lightgray;
 }
 .imgProfil {
-  width: 400px;
-  height: 300px;
+  width: 50%;
+  height: 50%;
 }
 
 
@@ -27,4 +27,16 @@
 
 mat-card {
   overflow: hidden;
+}
+
+.footer {
+  height: 20px;
+}
+
+.community-info {
+  text-align: center;
+}
+
+.title {
+  justify-content: center;
 }

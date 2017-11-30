@@ -6,3 +6,115 @@
 .addButton {
   background: lightgray;
 }
+
+:host {
+  display: block;
+  margin-top: 20px;
+}
+
+.list-group-item {
+  overflow: hidden;
+}
+
+:host {
+  display: block;
+}
+
+/*:host:hover .delete-btn {*/
+/*right: -10px;*/
+/*}*/
+
+:host:hover .preview-title {
+  padding-right: 20px;
+}
+
+.preview-body {
+  margin-top: 15px;
+}
+
+.details {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.details td {
+  text-align: right;
+}
+
+.details th,
+.details td {
+  vertical-align: top;
+}
+
+.preview-title {
+  cursor: pointer;
+  padding-right: 0;
+  position: relative;
+  transition: padding .2s;
+}
+
+.right {
+  position: absolute;
+  right: 0;
+}
+
+.list-group {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.delete-btn {
+  /*position: absolute;*/
+  /*right: 0;*/
+  transition: all .2s;
+  opacity: .5;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+}
+
+.delete-btn:active {
+  opacity: .7;
+}
+
+/*.col-md-6 {*/
+  /*position: relative;*/
+  /*width: 30%;*/
+  /*min-height: 1px;*/
+  /*padding-right: 15px;*/
+  /*padding-left: 15px;*/
+/*}*/
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+

@@ -1,47 +1,55 @@
 <div *ngIf="nav.visible && isUser" class='main-nav'>
-  <div class='navbar navbar-inverse'>
+  <nav class='navbar navbar-inverse'>
     <div class='navbar-header'>
-      <div fxFlex>
+      <div class="mobile-header">
         <h1>Debt'off</h1>
-        <mat-list >
+        <mat-list>
           <mat-list-item style="color: wheat">
             <img mat-list-avatar src={{user.info.avatarUri}}>
             <h4  mat-line>{{user.info.firstName}}</h4>
           </mat-list-item>
         </mat-list>
+        <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+          <span class='sr-only'>Toggle navigation</span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+        </button>
       </div>
-      <!--<p *ngIf="token">{{}}</p>-->
+
     </div>
+
+    <!--<a class='navbar-brand' [routerLink]="['/home']">Loans</a>-->
+
     <div class='clearfix'></div>
-    <div class='navbar-collapse collapse'>
+    <div id="myNavmenu" class='navbar-collapse collapse'>
       <ul class='nav navbar-nav'>
-        <li routerLinkActive="link-active">
+        <li [routerLinkActive]="['link-active']">
           <a [routerLink]="['/home/debts']">
             <span class='glyphicon glyphicon-home'></span> Debts
           </a>
         </li>
-        <li routerLinkActive="link-active">
-          <a routerLink="/home/search">
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/home/search']">
             <span class='glyphicon glyphicon-education'></span> Search
           </a>
         </li>
-        <li routerLinkActive="link-active">
+        <li [routerLinkActive]="['link-active']">
           <a [routerLink]="['/home/communities']">
             <span class='glyphicon glyphicon-th-list'></span> Communities
           </a>
         </li>
-        <li routerLinkActive="link-active">
+        <li [routerLinkActive]="['link-active']">
           <a [routerLink]="['/home/notifications']">
             <span class='glyphicon glyphicon-th-list'></span> Notifications
           </a>
         </li>
-        <li routerLinkActive="link-active">
+        <li [routerLinkActive]="['link-active']">
           <a (click)="logout()" [routerLink]="['/header']">
             <span class='glyphicon glyphicon-th-large'></span> Logout
           </a>
         </li>
       </ul>
     </div>
-  </div>
+  </nav>
 </div>
-<!--<router-outlet></router-outlet>-->

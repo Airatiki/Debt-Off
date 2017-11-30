@@ -19,3 +19,11 @@
 .badge {
   border-radius: 0.25rem;
 }
+
+.user-info {
+  text-align: center;
+}
+
+.title {
+  justify-content: center;
+}
