@@ -21,3 +21,19 @@ i {  vertical-align: middle; }
 .user_panel {
   width: 100%;
 }
+
+.search-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.input-container {
+  font-size: 16px;
+  padding-right: 5px;
+}
+
+.row {
+  padding: 15px;
+}

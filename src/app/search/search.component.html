@@ -1,8 +1,11 @@
 
 <!--<div class="row col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-2">-->
-  <div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<!--<div class="col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-2">-->
+<div class="row">
+<div class="col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-2 col-xs-12 ">
 
-<mat-input-container>
+<div class="search-header">
+<mat-input-container class="input-container">
   <input matInput placeholder="Search" (keyup)="searchTerm$.next($event.target.value)">
 </mat-input-container>
 
@@ -11,9 +14,10 @@
     {{ search.viewValue }}
   </mat-option>
 </mat-select>
+</div>
 
 
-  <div class="container" *ngIf="resultsUser && isUserShown">
+  <div *ngIf="resultsUser && isUserShown">
     <div class="row">
       <div class="panel panel-default user_panel">
         <div class="panel-heading">
@@ -30,7 +34,7 @@
               </tr>
               <tr *ngFor="let result of resultsUser" (click)="onUserClick(result)">
                 <td width="10">
-                  <img class="pull-left img-circle nav-user-photo" width="50" src="{{result.avatarUri}}" />  
+                  <img class="pull-left img-circle nav-user-photo" width="50" src="{{result.avatarUri}}" onerror="this.src='../assets/anonim.png'" />  
                 </td>
                 <td>
                   {{result.firstName}} {{result.lastName}}<br><i class="fa fa-envelope"></i>
@@ -49,7 +53,7 @@
   </div>
 
 
-<div class="container" *ngIf="resultsCommunity && !isUserShown">
+<div *ngIf="resultsCommunity && !isUserShown">
   <div class="row">
     <div class="panel panel-default user_panel">
       <div class="panel-heading">
@@ -84,4 +88,5 @@
   </div>
 </div>
 
+</div>
 </div>

@@ -1,9 +1,3 @@
-<!--<div class="container"-->
-     <!--fxLayout="row"-->
-     <!--fxLayout.sm="column"-->
-     <!--fxLayout.xs="column"-->
-     <!--fxLayoutAlign.gt-md="space-around center"-->
-     <!--fxLayoutGap="10px">-->
 <div class="row">
 
   <div  class="mat-elevation-z8 col-md-5 col-md-push-1">
@@ -42,14 +36,14 @@
 
 
 
-<div *ngIf="isUser" class="col-md-4 col-md-push-2">
+<div *ngIf="isUser" class="col-md-4 col-md-push-2 user-card">
   <mat-card class="user-info">
     <mat-card-header class="title">
       <mat-card-title>
         <h3>{{user.info.firstName}}</h3>
       </mat-card-title>
     </mat-card-header>
-    <img mat-card-image class="imgProfil" src={{user.info.avatarUri}} >
+    <img mat-card-image class="imgProfil" src={{user.info.avatarUri}} onerror="this.src='../assets/anonim.png'" >
     <mat-card-content>
       <p>UserName: {{user.info.userName}}</p>
       <p>Email: {{user.info.email}}</p>

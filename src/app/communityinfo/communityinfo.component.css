@@ -33,7 +33,15 @@ mat-card {
   height: 20px;
 }
 
+@media (max-width: 768px) {
+  .community-card {
+    padding-top: 30px;
+  }
+}
+
 .community-info {
+  padding: 0 0 10px 0;
+  /*padding-bottom: 10px;*/
   text-align: center;
 }
 

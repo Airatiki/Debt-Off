@@ -13,7 +13,7 @@
     <mat-table  #table [dataSource]="dataSource">
       <ng-container matColumnDef="avatar">
         <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <img class="crop" src={{row.avatarUri}}> </mat-cell>
+        <mat-cell *matCellDef="let row"> <img class="crop" src={{row.avatarUri}} onerror="this.src='../assets/anonim.png'"> </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="firstName">
@@ -42,14 +42,14 @@
 
 
 
-  <div *ngIf="isCommunity" class="col-md-4 col-md-push-2">
+  <div *ngIf="isCommunity" class="col-md-4 col-md-push-2 community-card">
     <mat-card class="community-info">
       <mat-card-header class="title">
         <mat-card-title>
           <h3>{{community.name}}</h3>
         </mat-card-title>
       </mat-card-header>
-      <img mat-card-image class="imgProfil" src="../../assets/community.jpg" >
+      <img mat-card-image class="imgProfil" src="/Debt-Off/src/assets/community.jpg" >
       <mat-card-content>
         <p>ID: {{community.id}}</p>
         <p>Members: {{community.members.length}}</p>

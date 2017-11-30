@@ -18,7 +18,7 @@
 
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
-      <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}}> </mat-cell>
+      <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}} onerror="this.src='../assets/anonim.png'"> </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="userName">
@@ -74,7 +74,7 @@
 
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
-      <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}}> </mat-cell>
+      <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}} onerror="this.src='../assets/anonim.png'"> </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="userName">
