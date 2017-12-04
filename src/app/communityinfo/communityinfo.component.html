@@ -13,7 +13,8 @@
     <mat-table  #table [dataSource]="dataSource">
       <ng-container matColumnDef="avatar">
         <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <img class="crop" src={{row.avatarUri}} onerror="this.src='../assets/anonim.png'"> </mat-cell>
+        <!--onerror="this.src='../assets/anonim.png'"-->
+        <mat-cell *matCellDef="let row"> <img class="crop" src={{row.avatarUri}} onerror="this.src='/Debt-Off/assets/anonim.png'"> </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="firstName">
@@ -26,37 +27,38 @@
         <mat-cell *matCellDef="let row"> {{row.userName}} </mat-cell>
       </ng-container>
 
-
-
-      <!--<ng-container matColumnDef="email">-->
-        <!--<mat-header-cell *matHeaderCellDef > Email </mat-header-cell>-->
-        <!--<mat-cell *matCellDef="let row" > {{row.email}} </mat-cell>-->
-      <!--</ng-container>-->
-
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserClick(row)"></mat-row>
     </mat-table>
-    <div class="footer">
+    <div class="footer-margin">
     </div>
   </div>
 
 
 
+
   <div *ngIf="isCommunity" class="col-md-4 col-md-push-2 community-card">
     <mat-card class="community-info">
-      <mat-card-header class="title">
+      <mat-card-header class="community-title">
         <mat-card-title>
           <h3>{{community.name}}</h3>
         </mat-card-title>
       </mat-card-header>
-      <img mat-card-image class="imgProfil" src="http://standrewscobourg.org/wp-content/uploads/2017/07/community.jpg" >
+      <!--src="../../assets/community.jpg"-->
+      <img mat-card-image class="community-img" src="/Debt-Off/assets/community.jpg" >
       <mat-card-content>
         <p>ID: {{community.id}}</p>
         <p>Members: {{community.members.length}}</p>
 
         <button mat-button (click)="leave()" class="addButton" >Leave</button>
+        <button mat-button (click)="showGraph()" class="addButton">Show Graph</button>
         <button mat-button (click)="optimize()" class="addButton" >Optimize</button>
       </mat-card-content>
+
+      <!--<div *ngIf="graphLoaded">-->
+        <!--kek-->
+        <!--<img [src]="path" style="width: 400px; height: 400px">-->
+      <!--</div>-->
     </mat-card>
   </div>
 
@@ -67,7 +69,8 @@
           <h3>{{community.name}}</h3>
         </mat-card-title>
       </mat-card-header>
-      <img mat-card-image class="imgProfil" src="../../assets/community.jpg" >
+      <!--src="../../assets/community.jpg"-->
+      <img mat-card-image class="imgProfil" src="/Debt-Off/assets/community.jpg" >
       <mat-card-content>
         <p>ID: {{community.id}}</p>
         <button mat-button (click)="join()" class="addButton" >Join</button>

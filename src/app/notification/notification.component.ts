@@ -11,6 +11,7 @@ import {Notification} from '../shared/Notification';
 export class NotificationComponent implements OnInit {
 
   notification: Notification;
+  dataLoaded = false;
   notifications: any[];
   balance = 0;
   selectedNotification: Object = {};
@@ -22,7 +23,8 @@ export class NotificationComponent implements OnInit {
   getNotifications() {
     this.userservice.getNotifications()
       .subscribe(data => {
-        this.notifications = data.json().invoices;
+        this.dataLoaded = true;
+        this.notifications = data.json().ingoing;
         this.balance = this.notifications.reduce((total, {amount}) => total += amount, 0);
         console.log(this.notifications);
       }, error => {

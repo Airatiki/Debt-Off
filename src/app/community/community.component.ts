@@ -12,6 +12,7 @@ import {Community} from '../shared/Community';
 })
 export class CommunityComponent implements OnInit {
 
+  dataLoaded = false;
   submition = true;
   showCreateButton = true;
   formCreated = false;
@@ -61,6 +62,7 @@ export class CommunityComponent implements OnInit {
   getCommunities() {
     this.userservice.getCommunities()
       .subscribe(data => {
+        this.dataLoaded = true;
         this.communities = data.json();
         console.log(this.communities);
       }, error => {

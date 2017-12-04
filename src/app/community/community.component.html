@@ -4,7 +4,12 @@
          My communities
        </div>
        <ul class="list-group list-group-flush">
+         <div class="spiner" *ngIf="!dataLoaded">
+           <mat-spinner></mat-spinner><h4>Loading...</h4>
+         </div>
          <li class="list-group-item" *ngFor="let community of communities" (click)="onClickCommunity(community)">
+           <!--src="/Debt-Off/assets/community.jpg"-->
+           <!--src="../../assets/community.jpg"-->
            <div class="d-flex justify-content-between align-items-center preview-title">
              <img class="pull-left img-circle nav-user-photo" width="50" src="/Debt-Off/assets/community.jpg" />  
              {{community.name}}

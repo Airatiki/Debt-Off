@@ -4,7 +4,10 @@ import {UserService} from '../services/user.service';
 import {FormBuilder} from '@angular/forms';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
+import {DomSanitizer} from '@angular/platform-browser';
 import 'rxjs/add/observable/of';
+import {MdDialog} from '@angular/material';
+import {GraphComponent} from '../graph/graph.component';
 
 @Component({
   selector: 'app-communityinfo',
@@ -18,7 +21,12 @@ export class CommunityinfoComponent implements OnInit {
   members: any= [];
   isCommunity = false;
   toJoin = false;
-  constructor(private route: ActivatedRoute, private router: Router, private userservice: UserService, private fb: FormBuilder) { }
+  path: any;
+  graphLoaded = false;
+  constructor(private route: ActivatedRoute, private router: Router,
+              private userservice: UserService, private fb: FormBuilder,
+              private sanitization: DomSanitizer,
+              private dialog: MdDialog) { }
 
   ngOnInit() {
     this.route.params.switchMap((params: Params) => {
@@ -68,6 +76,27 @@ export class CommunityinfoComponent implements OnInit {
     this.userservice.optimizeCommunity(this.community.id).subscribe(response => {
       console.log(response);
     });
+  }
+
+  showGraph() {
+
+    const dialogRef = this.dialog.open(GraphComponent);
+    const instance = dialogRef.componentInstance;
+    instance.community = this.community;
+    // console.log('dialogRef',dialogRef);
+    // this.dialog.open(GraphComponent, {hasBackdrop: true,
+    //   backdropClass: 'myBackdrop',
+    //   panelClass: 'myClass',
+    //   width: '500px'});
+
+
+    // console.log('GRAAAp CLICKED');
+    // this.userservice.showCommunityGraph(this.community.id).subscribe(data => {
+    //   console.log('DATA OT GRAPHA');
+    //   console.log(data);
+    //   this.path = this.sanitization.bypassSecurityTrustResourceUrl('https://debtoff.azurewebsites.net/api/community/1/graph');
+    //   this.graphLoaded = true;
+    // });
   }
 
   onUserClick(user) {

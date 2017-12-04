@@ -99,7 +99,7 @@ export class UserService {
     });
   }
   optimizeCommunity(id: number) {
-    return this.http.post(BASE_URL + '/community/' + id + '/optimize',
+    return this.http.post(BASE_URL + '/community/' + id + '/optimize', {},
       this.jwt()).map((response: Response) => {
       console.log(response);
     });
@@ -117,6 +117,10 @@ export class UserService {
       .map((response: Response) => {
       console.log(response);
       });
+  }
+
+  showCommunityGraph(id: number) {
+    return this.http.get(BASE_URL + `/community/${id}/graph`, this.jwt());
   }
 
 
@@ -138,7 +142,8 @@ export class UserService {
   }
 
   createInvoice(debtorId: number, description: string, amount: number) {
-    return this.http.post(BASE_URL + '/invoice/user/' + debtorId,
+    console.log(debtorId);
+    return this.http.post(BASE_URL + '/invoice/' + debtorId,
       JSON.stringify({description: description, amount: amount, time: (new Date()).toISOString()}), this.postJWT())
       .map((response: Response) => {
       console.log('invooooice', response);

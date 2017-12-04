@@ -24,6 +24,7 @@ export class DebtComponent implements OnInit {
 
   displayedColumns = ['avatar', 'FirstName', 'LastName', 'userName', 'amount'];
 
+  dataLoaded = false;
   creditsDatabase: any;
   debtsDatabase: any;
   dataCredits: ExampleDataSource | null;
@@ -31,8 +32,8 @@ export class DebtComponent implements OnInit {
 
   @ViewChild(MdPaginator) paginator: MdPaginator;
   @ViewChild('debtsPaginator') debtsPaginator: MdPaginator;
-  totalDebtsAmount: number;
-  totalCreditsAmount: number;
+  // totalDebtsAmount: number;
+  // totalCreditsAmount: number;
 
   constructor(public nav: NavbarService, private userservice: UserService, private router: Router, private route: ActivatedRoute ) { }
 
@@ -43,9 +44,9 @@ export class DebtComponent implements OnInit {
 
     this.creditsDatabase = new ExampleDatabase(this.userservice, true);
     this.dataCredits = new ExampleDataSource(this.creditsDatabase, this.paginator);
-    this.totalCreditsAmount  = 151;
-    this.totalDebtsAmount = 1404;
-    console.log(loans);
+    // this.totalCreditsAmount  = 151;
+    // this.totalDebtsAmount = 1404;
+    // console.log(loans);
 
   }
 
@@ -56,7 +57,7 @@ export class DebtComponent implements OnInit {
 
 }
 
-let loans: any = {};
+// let loans: any = {};
 let totalDebtsAmountans: any = {};
 
 
@@ -76,7 +77,7 @@ export class ExampleDatabase {
   addDebts() {
     this.userservice.getUserSummary().subscribe(data => {
       totalDebtsAmountans = data.json();
-      this.totalDebts = totalDebtsAmountans.debts.reduce((total, {totalAmount}) => total += totalAmount, 0);;
+      this.totalDebts = totalDebtsAmountans.debts.reduce((total, {totalAmount}) => total += totalAmount, 0);
       for (let i = 0; i < totalDebtsAmountans.debts.length; i++) {
         const date = new Date(totalDebtsAmountans.debts[i].time);
         const hours = date.getHours() + ':' + date.getMinutes();

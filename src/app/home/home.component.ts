@@ -46,7 +46,13 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
+    // this.router.navigate(['/']);
+    // window.location.href = 'http://localhost:4200';
+    window.location.href = 'https://airatiki.github.io/Debt-Off/header';
+    console.log(localStorage.getItem('currentUser'));
+
     localStorage.removeItem('currentUser');
+
     console.log(localStorage.getItem('currentUser'));
     // location.href = 'localhost:4200/header';
   }

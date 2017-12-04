@@ -12,9 +12,13 @@
     CREDITS
     <span>Total:<strong>{{creditsDatabase.totalCredits | currency:'RUB':'symbol'}}</strong></span>
   </div>
+
   <!--//,  Total Amount: {{totalCreditsAmount}}-->
 
   <mat-table  #table [dataSource]="dataCredits">
+    <div class="spiner" *ngIf="">
+      <mat-spinner></mat-spinner><h4>Loading...</h4>
+    </div>
 
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>

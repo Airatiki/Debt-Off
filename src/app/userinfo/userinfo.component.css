@@ -1,6 +1,7 @@
 .imgProfil {
-  width: 100px;
-  height: 100px;
+  width: 50%;
+  height: 50%;
+  display: inline;
   /*overflow: hidden;*/
 }
 
@@ -31,3 +32,8 @@
 .user-card {
   padding-top: 30px;
 }
+
+.mat-card-image {
+  padding: 0;
+}
+

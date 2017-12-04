@@ -4,11 +4,14 @@
       <div class="card-header text-center">
         Invoices
       </div>
+      <div class="spiner" *ngIf="!dataLoaded">
+        <mat-spinner></mat-spinner><h4>Loading...</h4>
+      </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let notification of notifications; let i = index">
           <div (click)="onClick(notification)"
                class="d-flex justify-content-between align-items-center preview-title">
-            {{notification.creditorId}}
+            {{notification.target.firstName}}
             <span class="right">
             <span class="badge badge-secondary" >{{notification.amount | currency:'RUB':'symbol'}}</span>
             <button type="button" class="btn btn-success btn-xs" (click)="onAcceptInvoice(notification, $event)">Accept</button>

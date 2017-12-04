@@ -1,21 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-body{
-  padding: 0;
-  margin: 0;
-  font-family: Roboto, sans-serif;
-  //background-image: url('assets/Desktop_2.png');
-  //height: 100%;
-  //
-  ///* Center and scale the image nicely */
-  //background-position: center;
-  //background-size: cover;
-}
-.container{
-  margin: 20px;
-  display: flex;
-}
-
+//
+//body{
+//  padding: 0;
+//  margin: 0;
+//  font-family: Roboto, sans-serif;
+//  //background-image: url('assets/Desktop_2.png');
+//  //height: 100%;
+//  //
+//  ///* Center and scale the image nicely */
+//  //background-position: center;
+//  //background-size: cover;
+//}
+//.container{
+//  margin: 20px;
+//  display: flex;
+//}
+//
 $lt-gray: #ddd;
 $background-dark: #512DA8;
 $background-light: #9575CD;
@@ -28,12 +29,12 @@ $accent-color:         #FFC107;
 $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
-
-@mixin zero-margin($pad-up-down, $pad-left-right) {
-  margin: 0px auto;
-  padding: $pad-up-down $pad-left-right;
-}
-
+//
+//@mixin zero-margin($pad-up-down, $pad-left-right) {
+//  margin: 0px auto;
+//  padding: $pad-up-down $pad-left-right;
+//}
+//
 .background-primary {
   background-color: $background-dark!important;
 }
@@ -44,16 +45,21 @@ $divider-color:        #BDBDBD;
   color: floralwhite!important;
 }
 
-.flex-spacer {
-  flex: 1 1 auto;
+.spiner {
+  display: inline;
+  margin: 0 auto;
 }
-
-
-
-.myBackdrop {
-  background-color: bisque;
-}
-
-.myClass .mat-dialog-container {
-  background-color: bisque;
-}
+//
+//.flex-spacer {
+//  flex: 1 1 auto;
+//}
+//
+//
+//
+//.myBackdrop {
+//  background-color: bisque;
+//}
+//
+//.myClass .mat-dialog-container {
+//  background-color: bisque;
+//}

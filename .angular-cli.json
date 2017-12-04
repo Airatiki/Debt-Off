@@ -20,12 +20,24 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
-        "../node_modules/font-awesome/scss/font-awesome.scss",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        "assets/css/style.css",
+        "assets/css/bootstrap.min.css",
+        "assets/css/owl.carousel.css",
+        "assets/css/responsive.css",
+        "assets/css/font-awesome.min.css",
+        "assets/css/animate.min.css",
+        "assets/css/popup.css"
       ],
       "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "assets/js/jquery.min.js",
+        "assets/js/parallax.min.js",
+        "assets/js/para.js",
+        "assets/js/main.js",
+        "assets/js/owl.carousel.js",
+        "assets/js/jquery.magnific-popup.min.js",
+        "assets/js/bootstrap.min.js",
+        "assets/js/html5shiv.min.js",
+        "assets/js/myjs.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -1,0 +1,19 @@
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: #444444;
+  color: white;
+}
+
+@media (max-width: 450px) {
+  mat-toolbar {
+    font-size: 12px;
+    flex-direction: column;
+  }
+  button {
+    font-size: 12px;
+  }
+  
+}

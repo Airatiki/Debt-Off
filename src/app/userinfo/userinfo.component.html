@@ -1,7 +1,12 @@
+
+
 <div class="row">
 
   <div  class="mat-elevation-z8 col-md-5 col-md-push-1">
     <h3>History,  Total Amount: {{database.totalAmount}} </h3>
+    <div class="spiner" *ngIf="!isUser">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+    </div>
 
     <mat-table  #table [dataSource]="dataSource">
       <ng-container matColumnDef="Description">
@@ -35,7 +40,9 @@
   </div>
 
 
-
+  <div class="col-md-4 col-md-push-2 user-card" *ngIf="!isUser">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+  </div>
 <div *ngIf="isUser" class="col-md-4 col-md-push-2 user-card">
   <mat-card class="user-info">
     <mat-card-header class="title">

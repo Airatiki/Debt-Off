@@ -45,16 +45,23 @@ export class UserinfoComponent implements OnInit {
   user: any = {};
   isUser = false;
   ngOnInit() {
+    console.log(this.paginator);
+    // this.database = new ExampleDatabase(this.userservice, this.route);
+    // this.dataSource = new ExampleDataSource(this.database, this.paginator);
     this.database = new ExampleDatabase(this.userservice, this.route);
-    this.dataSource = new ExampleDataSource(this.database, this.paginator);
+
 
     this.route.params.switchMap((params: Params) => {
       this.userservice.getUserInfo(params['id']).subscribe(data => {
         this.user = data.json();
         this.isUser = true;
+        console.log('USER PRISHEL', this.isUser);
+        this.dataSource = new ExampleDataSource(this.database, this.paginator);
+
       });
       return params['id'];
-    }).subscribe(() => {});
+    }).subscribe(() => {
+    });
 
     this.createForm();
   }

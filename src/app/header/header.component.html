@@ -1,14 +1,474 @@
-<mat-toolbar class="back">
-  <!--<a mat-button routerLink="/home" routerLinkActive="active"><span class="fa fa-home fa-lg"></span> Home</a>-->
-  <!--<a mat-button routerLink="/about" routerLinkActive="active"><span class="fa fa-info fa-lg"></span> Information</a>-->
-  <!--<a mat-button routerLink="/menu" routerLinkActive="active"><span class="fa fa-list fa-lg"></span> Debts</a>-->
-  <!--<a mat-button href="/header#kek"><span class="fa fa-address-card fa-lg"></span> Private office</a>-->
-  <span class="flex-spacer"></span>
-  <a mat-button (click)="vkReg()"><span class="fa fa-list fa-lg"></span> VK</a>
-  <a mat-button (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span>Login</a>
+<!--<mat-toolbar class="back">-->
+  <!--&lt;!&ndash;<a mat-button routerLink="/home" routerLinkActive="active"><span class="fa fa-home fa-lg"></span> Home</a>&ndash;&gt;-->
+  <!--&lt;!&ndash;<a mat-button routerLink="/about" routerLinkActive="active"><span class="fa fa-info fa-lg"></span> Information</a>&ndash;&gt;-->
+  <!--&lt;!&ndash;<a mat-button routerLink="/menu" routerLinkActive="active"><span class="fa fa-list fa-lg"></span> Debts</a>&ndash;&gt;-->
+  <!--&lt;!&ndash;<a mat-button href="/header#kek"><span class="fa fa-address-card fa-lg"></span> Private office</a>&ndash;&gt;-->
+  <!--<span class="flex-spacer"></span>-->
+  <!--<a mat-button (click)="vkReg()"><span class="fa fa-list fa-lg"></span> VK</a>-->
+  <!--<a mat-button (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span>Login</a>-->
 
-</mat-toolbar>
+<!--</mat-toolbar>-->
 
-<div class="centered hero-section" id="kek">
+<!--<div class="centered hero-section" id="kek">-->
 
+<!--</div>-->
+<div class="module-home" data-spy="scroll" data-target=".navbar">
+  <header role="header" class="header-top" id="headere-top">
+
+
+
+    <div class="header-fixed-wrapper" role="header-fixed">
+
+      <div class="container">
+
+        <!-- hgroup -->
+
+        <hgroup class="row">
+
+          <!-- logo -->
+
+          <div class="col-xs-5 col-sm-2 col-md-2 col-lg-2">
+
+            <h1>
+
+              <!--src="../../assets/images/logo2.png"-->
+              <a href="#headere-top" title="Rooky"><img src="/Debt-Off/assets/images/logo2.png" alt="Rooky" title="Rooky"/></a>
+
+            </h1>
+
+          </div>
+
+          <!-- logo -->
+
+          <!-- nav -->
+
+          <nav role="navigation" class="col-xs-12 col-sm-10 col-md-10 col-lg-10 navbar navbar-default">
+
+            <div class="navbar-header">
+
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
+                <span class="sr-only">Toggle navigation</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+              </button>
+
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+
+              <ul class="nav navbar-nav">
+
+                <li class="main" id="h"><a href="#headere-top" title="Home">Главная</a></li>
+
+                <li><a href="#section-one" title="Overview">Обзор</a></li>
+
+                <li><a href="#section-two" title="Features">Возможности</a></li>
+
+
+                <li><a href="#section-four" id="l" title="Team">Команда</a></li>
+
+                <li><button class="reg-button" (click)="vkReg()">Войти Vk</button></li>
+
+              </ul>
+
+            </div>
+
+          </nav>
+
+          <!-- nav -->
+
+        </hgroup>
+
+        <!-- hgroup -->
+
+      </div>
+
+    </div>
+
+    <!-- banner Text -->
+
+    <section class="text-center">
+
+      <h2><b>Debt'off</b> - лучший&nbsp;сервис для&nbsp;контроля <br>ваших задолженностей</h2>
+
+      <p>Расплачивайся с друзьями одним кликом</p>
+
+
+
+      <!--<a class="popup-vimeo video-button" href="https://vimeo.com/45830194"><i class="fa fa-caret-right" aria-hidden="true"></i></a>-->
+
+      <a class="button-header" (click)="vkReg()">Попробовать</a>
+
+    </section>
+
+
+
+    <!-- banner Text -->
+
+
+
+    <!-- banner image -->
+
+    <figure>
+      <!--data-image-src="../assets/head.jpg"-->
+      <div class="parallax-window item tp-banner-container" data-parallax="scroll" data-image-src="/Debt-Off/assets/head.jpg"></div>
+
+    </figure>
+
+    <!-- banner image -->
+
+  </header>
+
+  <!-- header -->
+
+
+
+  <!-- main -->
+
+  <main role="main" id=" main-wrapper">
+
+    <!-- section-one -->
+
+    <section class="section-one text-center" id="section-one">
+
+      <div class="container">
+
+        <header role="title-page">
+
+          <h4>О проекте</h4>
+
+          <!--<h2>We make your business gain more<br/>revenue at a glance.</h2>-->
+
+        </header>
+
+        <!--<article>-->
+
+          <!--<p>Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo risus, porta ac consectetur ac, ves<br/>-->
+
+            <!--tibulum at eros. Vestibulum id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra augue.<br/>-->
+
+            <!--Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas mollis interdum!</p>-->
+
+        <!--</article>-->
+
+
+
+        <!-- four boxes  -->
+
+        <div class="row four-box-pan" role="four-box">
+
+
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><i class="fa fa-table" aria-hidden="true"></i></figure>
+
+            <h5>Таблицы</h5>
+
+            <p>Итоговые таблицы по всем операциям с детализацией историй с отдельными пользователями.</p>
+
+          </section>
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><i class="fa fa-bell-o" aria-hidden="true"></i></figure>
+
+            <h5>Уведомления</h5>
+
+            <p>Долги можно не просто записывать на свой счет, но также выставлять их другим пользователям.</p>
+
+          </section>
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><i class="fa fa-users" aria-hidden="true"></i></figure>
+
+            <h5>Группы</h5>
+
+            <p>Объединяйтесь в группы с друзьями для совместного учета долгов.</p>
+
+          </section>
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><i class="fa fa-exchange" aria-hidden="true"></i></figure>
+
+            <h5>Алгоритм</h5>
+
+            <p>Алгоритм оптимально перераспределит долги между пользователями в группе.</p>
+
+          </section>
+
+
+
+        </div>
+
+        <!-- four boxes -->
+
+
+
+      </div>
+
+    </section>
+
+    <!-- section-one -->
+
+
+
+    <!-- section-two -->
+
+    <section class="section-two" id="section-two">
+
+
+
+      <!-- image-content -->
+
+      <section>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+
+          <article>
+
+            <h2>Get Maxium benifites by working with our experts.</h2>
+
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo orta felis euismod semper.</p>
+
+            <ul>
+
+              <li>Maecenas sed diam eget risus varius </li>
+
+              <li>orta felis euismod semper.Maecenas sed diam </li>
+
+              <li>amet non magna. Morbi leo orta semper.</li>
+
+              <li>Maecenas sed diam eget risus</li>
+
+            </ul>
+
+          </article>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+
+          <!--style="background-image:url('../../assets/168.jpg')"-->
+          <figure class="row" style="background-image:url('/Debt-Off/assets/168.jpg')"></figure>
+
+        </div>
+
+      </section>
+
+      <!-- image-content -->
+
+      <div class="clearfix"></div>
+
+      <!-- image-content -->
+
+      <section>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+
+          <!--style="background-image:url('../../assets/1600.jpg')"-->
+          <figure class="row" style="background-image:url('/Debt-Off/assets/1600.jpg')"></figure>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+
+          <article>
+
+            <h2>We even give you more than your expectation</h2>
+
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit amet non magna. </p>
+
+            <p>Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo orta felis euismod semper.Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius.</p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+      <!-- image-content -->
+
+      <div class="clearfix"></div>
+
+
+
+    </section>
+
+    <!-- section-two -->
+
+
+    <!-- section-four -->
+
+    <section class="section-four" id="section-four">
+
+      <div class="container">
+
+        <header role="title-page" class="text-center">
+
+          <h4>Наша Команда</h4>
+
+          <!--<h2>Our team is passionate about bringing the <br/>best for our customers.</h2>-->
+
+        </header>
+
+        <!-- Team -->
+
+        <div class="team-pan row">
+
+
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
+
+            <header>
+
+              <h5>Чучмек №1</h5>
+
+              <h6>делает 90% работы</h6>
+
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+
+            </header>
+
+          </section>
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
+
+            <header>
+
+              <h5>Чучмек №2</h5>
+
+              <h6>Первый сливается</h6>
+
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+
+            </header>
+
+          </section>
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
+
+            <header>
+
+              <h5>Чучмек №3</h5>
+
+              <h6>Баласт команды</h6>
+
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+
+            </header>
+
+          </section>
+
+          <section class="col-xs-12 col-sm-6 col-md-3">
+
+            <figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
+
+            <header>
+
+              <h5>Чучмек №4</h5>
+
+              <h6>Таксист</h6>
+
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+
+              <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+
+            </header>
+
+          </section>
+
+
+
+        </div>
+
+        <!-- Team -->
+
+      </div>
+
+    </section>
+
+    <!-- section-fore -->
+
+    <!-- footer -->
+
+    <footer role="footer" class="footer text-center">
+
+      <div class="container">
+
+        <!-- socil-icons -->
+
+        <section role="socil-icons" class="socil-icons">
+
+          <a href="https://twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+
+          <a href="https://facebook.com/profile.php?id=100017839395560"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+          <a href="http://vk.com/id178227724"><i class="fa fa-vk" aria-hidden="true"></i></a>
+
+          <a href="https://plus.google.com/"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+
+        </section>
+
+        <!-- socil-icons -->
+
+        <!--nav -->
+
+        <nav role="footer-nav">
+
+          <p class="copy">&copy; 2017. All rights reserved. Made with <i class="fa fa-heart pulse"></i> by <a href="http://vk.com/id178227724">Airat Bikbaev</a></p>
+
+
+        </nav>
+
+        <!--nav -->
+
+
+      </div>
+
+    </footer>
+
+    <!-- footer -->
+
+
+
+  </main>
 </div>
+<!-- main -->
+

@@ -15,9 +15,12 @@
   </mat-option>
 </mat-select>
 </div>
+  <div class="spiner" *ngIf="!dataLoaded">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+  </div>
 
 
-  <div *ngIf="resultsUser && isUserShown">
+  <div *ngIf="dataLoaded && resultsUser && isUserShown">
     <div class="row">
       <div class="panel panel-default user_panel">
         <div class="panel-heading">
@@ -53,7 +56,7 @@
   </div>
 
 
-<div *ngIf="resultsCommunity && !isUserShown">
+<div *ngIf="dataLoaded && resultsCommunity && !isUserShown">
   <div class="row">
     <div class="panel panel-default user_panel">
       <div class="panel-heading">

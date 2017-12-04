@@ -1,9 +1,10 @@
 .addButton {
   background: lightgray;
 }
-.imgProfil {
+.community-img {
   width: 50%;
   height: 50%;
+  display: inline;
 }
 
 
@@ -11,6 +12,7 @@
   width: 50%;
   height: 50%;
   border-radius: 50%;
+  display: inline;
 }
 
 .mat-header-row {
@@ -29,7 +31,7 @@ mat-card {
   overflow: hidden;
 }
 
-.footer {
+.footer-margin {
   height: 20px;
 }
 
@@ -45,6 +47,6 @@ mat-card {
   text-align: center;
 }
 
-.title {
+.community-title {
   justify-content: center;
 }
