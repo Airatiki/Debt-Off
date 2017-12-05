@@ -1,3 +1,0 @@
-$('.parallax-window').parallax({});
-
-
