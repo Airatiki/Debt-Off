@@ -70,13 +70,13 @@
   background-color: #dc3545;
 }
 
-@media (max-width: 600px) {
-  .example-container {
-  min-width: 100px;
-    font-size: 8px;
-  }
+/*@media (max-width: 600px) {*/
+  /*.example-container {*/
+  /*min-width: 100px;*/
+    /*font-size: 8px;*/
+  /*}*/
 
-}
+/*}*/
 
 
 
