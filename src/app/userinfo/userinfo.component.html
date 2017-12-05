@@ -1,26 +1,25 @@
-
-
 <div class="row">
 
   <div  class="mat-elevation-z8 col-md-5 col-md-push-1">
-    <h3>History,  Total Amount: {{database.totalAmount}} </h3>
+    <h3>Итого: {{database.totalAmount}} </h3>
+
     <div class="spiner" *ngIf="!isUser">
-    <mat-spinner></mat-spinner><h4>Loading...</h4>
+    <mat-spinner></mat-spinner><h4>Загрузка...</h4>
     </div>
 
     <mat-table  #table [dataSource]="dataSource">
       <ng-container matColumnDef="Description">
-        <mat-header-cell *matHeaderCellDef > Description </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef > Описание </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Date">
-        <mat-header-cell *matHeaderCellDef > Date </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.time}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef > Дата </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.time | date:'medium'}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Amount">
-        <mat-header-cell *matHeaderCellDef > Amount </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef > Сумма </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span class="badge" [style.background-color] = "row.color">{{row.amount | currency:'RUB':'symbol'}}</span>
           <!--{{row.amount | currency:'RUB':'symbol'}} -->
@@ -41,7 +40,7 @@
 
 
   <div class="col-md-4 col-md-push-2 user-card" *ngIf="!isUser">
-    <mat-spinner></mat-spinner><h4>Loading...</h4>
+    <mat-spinner></mat-spinner><h4>Загрузка...</h4>
   </div>
 <div *ngIf="isUser" class="col-md-4 col-md-push-2 user-card">
   <mat-card class="user-info">
@@ -52,30 +51,30 @@
     </mat-card-header>
     <img mat-card-image class="imgProfil" src={{user.info.avatarUri}} onerror="this.src='../assets/anonim.png'" >
     <mat-card-content>
-      <p>UserName: {{user.info.userName}}</p>
+      <p>Никнейм: {{user.info.userName}}</p>
       <p>Email: {{user.info.email}}</p>
 
-      <button mat-button (click)="addDebt()" class="addButton" *ngIf="showAddButton">Add Debt</button>
+      <button mat-button (click)="addDebt()" class="primary-button" *ngIf="showAddButton">Добавить долг</button>
 
       <form novalidate [formGroup]="debtForm" (ngSubmit)="onSubmit()" *ngIf="formCreated" >
         <p>
           <mat-input-container class="half-width"
                               dividerColor="{{formErrors.description ? 'warn' : 'primary'}}" >
-            <input matInput formControlName="description" placeholder="Description" type="text" required>
+            <input matInput formControlName="description" placeholder="Описание" type="text" required>
             <mat-hint>
               <span [hidden]="!(formErrors.description)">{{formErrors.description}}</span>
             </mat-hint>
           </mat-input-container>
           <mat-input-container class="half-width"  dividerColor="{{formErrors.amount ? 'warn' : 'primary'}}">
-            <input matInput formControlName="amount" placeholder="Amount" type="number" pattern="[0-9]*" required>
+            <input matInput formControlName="amount" placeholder="Сумма" type="number" pattern="[0-9]*" required>
             <mat-hint>
               <span [hidden]="!(formErrors.amount)">{{formErrors.amount}}</span>
             </mat-hint>
           </mat-input-container>
-          <md-slide-toggle formControlName="agree">Make debt as invoice?</md-slide-toggle>
+          <md-slide-toggle formControlName="agree" color="primary">Сделать запрос на долг?</md-slide-toggle>
         </p>
-        <button type="submit" mat-button class="background-primary text-floral-white" [disabled] = "debtForm.invalid">Send</button>
-        <button mat-button class="background-primary text-floral-white" (click)="cancelButton()">Cancel</button>
+        <button type="submit" mat-button class="btn btn-success text-floral-white" [disabled] = "debtForm.invalid">Отправить</button>
+        <button mat-button class="btn btn-danger text-floral-white" (click)="cancelButton()">Отмена</button>
       </form>
 
 

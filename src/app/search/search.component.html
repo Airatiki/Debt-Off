@@ -6,17 +6,17 @@
 
 <div class="search-header">
 <mat-input-container class="input-container">
-  <input matInput placeholder="Search" (keyup)="searchTerm$.next($event.target.value)">
+  <input matInput placeholder="Поиск" (keyup)="searchTerm$.next($event.target.value)">
 </mat-input-container>
 
-<mat-select placeholder="Search by ..." [value]="searching[0].value" (valueChange)="onSelectChange($event)">
+<mat-select placeholder="Фильтр" [value]="searching[0].value" (valueChange)="onSelectChange($event)">
   <mat-option *ngFor="let search of searching" [value]="search.value">
     {{ search.viewValue }}
   </mat-option>
 </mat-select>
 </div>
   <div class="spiner" *ngIf="!dataLoaded">
-    <mat-spinner></mat-spinner><h4>Loading...</h4>
+    <mat-spinner></mat-spinner><h4>Загрузка...</h4>
   </div>
 
 
@@ -24,7 +24,7 @@
     <div class="row">
       <div class="panel panel-default user_panel">
         <div class="panel-heading">
-          <h3 class="panel-title">User List</h3>
+          <h3 class="panel-title">Список найденных пользователей</h3>
         </div>
         <div class="panel-body">
           <div class="table-container">
@@ -32,7 +32,7 @@
               <tbody>
               <tr *ngIf="resultsUser.length === 0">
                 <td>
-                  Nothing to show...
+                  Ничего не найдено...
                 </td>
               </tr>
               <tr *ngFor="let result of resultsUser" (click)="onUserClick(result)">
@@ -60,7 +60,7 @@
   <div class="row">
     <div class="panel panel-default user_panel">
       <div class="panel-heading">
-        <h3 class="panel-title">Community List</h3>
+        <h3 class="panel-title">Список найденных сообществ</h3>
       </div>
       <div class="panel-body">
         <div class="table-container">

@@ -1,11 +1,11 @@
 <div class="row col-md-6 col-md-offset-3 col-sm-9 ">
      <div class="card">
        <div class="card-header text-center" automation-id="title">
-         My communities
+         Мои группы
        </div>
        <ul class="list-group list-group-flush">
          <div class="spiner" *ngIf="!dataLoaded">
-           <mat-spinner></mat-spinner><h4>Loading...</h4>
+           <mat-spinner></mat-spinner><h4>Загрузка...</h4>
          </div>
          <li class="list-group-item" *ngFor="let community of communities" (click)="onClickCommunity(community)">
            <!--src="/Debt-Off/assets/community.jpg"-->
@@ -20,19 +20,19 @@
          </li>
        </ul>
        <div class="card-footer text-center">
-           <button mat-button class="addButton" *ngIf="showCreateButton" (click)="createCommunity()">Create community</button>
+           <button mat-button class="primary-button" *ngIf="showCreateButton" (click)="createCommunity()">Создать сообщество</button>
            <form novalidate [formGroup]="communityForm" (ngSubmit)="onSubmit()" *ngIf="formCreated" >
              <p>
                <mat-input-container class="half-width"
                                     dividerColor="{{formErrors.name ? 'warn' : 'primary'}}" >
-                 <input matInput formControlName="name" placeholder="name" type="text" required>
+                 <input matInput formControlName="name" placeholder="Название" type="text" required>
                  <mat-hint>
                    <span [hidden]="!(formErrors.name)">{{formErrors.name}}</span>
                  </mat-hint>
                </mat-input-container>
              </p>
-             <button type="submit" mat-button class="background-primary text-floral-white" [disabled] = "communityForm.invalid">Create</button>
-             <button mat-button class="background-primary text-floral-white" (click)="cancelButton()">Cancel</button>
+             <button type="submit" mat-button class="btn btn-success text-floral-white" [disabled] = "communityForm.invalid">Создать</button>
+             <button mat-button class="btn btn-danger text-floral-white" (click)="cancelButton()">Отмена</button>
            </form>
        </div>
      </div>

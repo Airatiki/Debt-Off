@@ -14,8 +14,8 @@ import {Observable} from 'rxjs/Observable';
 })
 export class SearchComponent implements OnInit {
   searching = [
-    {value: 'user', viewValue: 'Users'},
-    {value: 'community', viewValue: 'Communities'}
+    {value: 'user', viewValue: 'Люди'},
+    {value: 'community', viewValue: 'Сообщества'}
   ];
   dataLoaded= true;
   isUserShown = true;

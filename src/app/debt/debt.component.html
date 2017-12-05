@@ -9,40 +9,44 @@
 <div  class="example-container mat-elevation-z8">
   <!--<h3>CREDITS, <span class="total">{{totalCreditsAmount}}</span></h3>-->
   <div class="preview-title">
-    CREDITS
-    <span>Total:<strong>{{creditsDatabase.totalCredits | currency:'RUB':'symbol'}}</strong></span>
+    Кредиты
+    <span>Итого: <strong>{{creditsDatabase.totalCredits | currency:'RUB':'symbol'}}</strong></span>
   </div>
+
+  <!--<div class="spiner" *ngIf="!isUser">-->
+    <!--<mat-spinner></mat-spinner><h4>Loading...</h4>-->
+  <!--</div>-->
 
   <!--//,  Total Amount: {{totalCreditsAmount}}-->
 
   <mat-table  #table [dataSource]="dataCredits">
-    <div class="spiner" *ngIf="">
-      <mat-spinner></mat-spinner><h4>Loading...</h4>
+    <div class="spiner" *ngIf="!isUser">
+      <mat-spinner></mat-spinner><h4>Загрузка...</h4>
     </div>
 
     <ng-container matColumnDef="avatar">
-      <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Аватар </mat-header-cell>
       <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}} onerror="this.src='../assets/anonim.png'"> </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="userName">
-      <mat-header-cell *matHeaderCellDef> UserName </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Никнейм </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.user.userName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="FirstName">
-      <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.user.firstName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="LastName">
-      <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Фамилия </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
     </ng-container>
 
     <!-- Color Column -->
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Сумма </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span automation-id="price" class="badge badge-success">{{row.totalAmount | currency:'RUB':'symbol'}}</span>
         <!--{{row.totalAmount}} -->
@@ -69,8 +73,8 @@
 
 <div  class="example-container mat-elevation-z8">
   <div class="preview-title">
-    DEBTS
-    <span>Total:<strong>{{debtsDatabase.totalDebts | currency:'RUB':'symbol'}}</strong></span>
+    Долги
+    <span>Итого: <strong>{{debtsDatabase.totalDebts | currency:'RUB':'symbol'}}</strong></span>
   </div>
   <!--,  Total Amount: {{totalDebtsAmount}}-->
 

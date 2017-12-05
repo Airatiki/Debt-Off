@@ -6,11 +6,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private sanitization: DomSanitizer) { }
 
   getUserSelf() {
     return this.http.get(BASE_URL + '/user/self', this.jwt());

@@ -1,31 +1,38 @@
-<!--<div style="width: 500px; height: 500px" *ngIf="graphLoaded">-->
-  <!--kek-->
-  <!--<img [src]="path" style="width: 1000px; height: 1000px;">-->
-<!--</div>-->
-<div>
+
+<div fxFlex fxLayout="column" style="height: 500px">
 <mat-toolbar mat-dialog-title>
-  {{community.name}} Graph
+  <h2>{{community.name}}</h2>
   <button mat-button (click)="optimizeGraph()">Оптимизировать</button>
   <span class="flex-spacer"></span>
 
+
+
   <button mat-button mat-dialog-close>&times;</button>
 </mat-toolbar>
+  <div class="resizing">
+    <button mat-button (click)="increaseImage()" class="fa fa-search-plus"></button>
+    <button mat-button (click)="decreaseImage()" class="fa fa-search-minus"></button>
+  </div>
+
 <div class="spiner" *ngIf="!graphLoaded">
-  <mat-spinner></mat-spinner><h4>Loading...</h4>
+  <mat-spinner></mat-spinner><h4>Загрузка...</h4>
 </div>
-<div class="row" *ngIf="graphLoaded">
-  <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-    <img class="img-responsive" [src]="path" />    <!--Mobile-->
-  </div>
-  <div class="hidden-xs col-sm-8 col-sm-offset-2 hidden-md hidden-lg">
-    <img class="img-responsive" [src]="path" />   <!--Tab-->
-  </div>
-  <div class="hidden-xs hidden-sm col-md-8 col-md-offset-2 hidden-lg">
-    <img class="img-responsive" [src]="path" />   <!--Desktop-->
-  </div>
-  <div class="hidden-xs hidden-sm hidden-md col-lg-8 col-lg-offset-2">
-    <img class="img-responsive" [src]="path" />  <!--Large-->
-  </div>
-</div>
+
+  <img *ngIf="graphLoaded" [src]="path" [style.width.px]="imgWidth" [style.height.px]="imgHeight">
+
+<!--<div class="row" *ngIf="graphLoaded">-->
+  <!--<div class="col-xs-12 hidden-sm hidden-md hidden-lg">-->
+    <!--<img [src]="path" />    &lt;!&ndash;Mobile&ndash;&gt;-->
+  <!--</div>-->
+  <!--<div class="hidden-xs col-sm-8 col-sm-offset-2 hidden-md hidden-lg">-->
+    <!--<img [src]="path" />   &lt;!&ndash;Tab&ndash;&gt;-->
+  <!--</div>-->
+  <!--<div class="hidden-xs hidden-sm col-md-8 col-md-offset-2 hidden-lg">-->
+    <!--<img [src]="path" />   &lt;!&ndash;Desktop&ndash;&gt;-->
+  <!--</div>-->
+  <!--<div class="hidden-xs hidden-sm hidden-md col-lg-8 col-lg-offset-2">-->
+    <!--<img [src]="path" />  &lt;!&ndash;Large&ndash;&gt;-->
+  <!--</div>-->
+<!--</div>-->
 
 </div>

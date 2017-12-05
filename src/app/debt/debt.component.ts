@@ -29,11 +29,10 @@ export class DebtComponent implements OnInit {
   debtsDatabase: any;
   dataCredits: ExampleDataSource | null;
   dataDebts: ExampleDataSource | null;
+  isUser = false;
 
   @ViewChild(MdPaginator) paginator: MdPaginator;
   @ViewChild('debtsPaginator') debtsPaginator: MdPaginator;
-  // totalDebtsAmount: number;
-  // totalCreditsAmount: number;
 
   constructor(public nav: NavbarService, private userservice: UserService, private router: Router, private route: ActivatedRoute ) { }
 
@@ -41,23 +40,17 @@ export class DebtComponent implements OnInit {
     this.debtsDatabase = new ExampleDatabase(this.userservice, false);
     this.dataDebts = new ExampleDataSource(this.debtsDatabase, this.debtsPaginator);
 
-
     this.creditsDatabase = new ExampleDatabase(this.userservice, true);
     this.dataCredits = new ExampleDataSource(this.creditsDatabase, this.paginator);
-    // this.totalCreditsAmount  = 151;
-    // this.totalDebtsAmount = 1404;
-    // console.log(loans);
-
+    // this.isUser = true;
   }
 
   onUserClick(user) {
-    // console.log(user);
     this.router.navigate(['/home/userinfo/' + user.id], { relativeTo: this.route });
   }
 
 }
 
-// let loans: any = {};
 let totalDebtsAmountans: any = {};
 
 

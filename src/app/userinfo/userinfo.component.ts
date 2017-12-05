@@ -27,13 +27,13 @@ export class UserinfoComponent implements OnInit {
 
   validationMessages = {
     'description': {
-      'required': 'Description is required.',
-      'minlength': 'Description must be at least 2 ch long',
-      'maxlength': 'Description must be less than 25 ch long'
+      'required': 'Обязательное поле',
+      'minlength': 'Должно быть не менее 2 символов',
+      'maxlength': 'Должно быть менее 25 символов'
     },
     'amount': {
-      'required': 'amount is required.',
-      'pattern': 'amount must be contain only numbers'
+      'required': 'Обязательное поле',
+      'pattern': 'Поле должно содержать только цифры'
     }
   };
   displayedColumns = ['Description', 'Date', 'Amount'];
@@ -110,6 +110,7 @@ export class UserinfoComponent implements OnInit {
     } else {
       this.userservice.createDebt(this.user.info.id, this.debt.description, this.debt.amount)
         .subscribe(response => {
+            this.ngOnInit();
             console.log(response);
           },
           error => {
@@ -117,15 +118,13 @@ export class UserinfoComponent implements OnInit {
           });
     }
 
-    this.debtForm.reset({
-      description: '',
-      amount: ''
-    });
+    this.cancelButton();
   }
 
   cancelButton() {
     this.formCreated = false;
     this.showAddButton = true;
+    this.debtForm.reset();
   }
 }
 
@@ -153,9 +152,9 @@ export class ExampleDatabase {
     }, 0);
 
     userHistory.forEach(x => {
-      const date = new Date(x.time);
-      const hours = date.getHours() + ':' + date.getMinutes();
-      x.time = date.toDateString() + ' ' + hours;
+      // const date = new Date(x.time);
+      // const hours = date.getHours() + ':' + date.getMinutes();
+      // x.time = date.toDateString() + ' ' + hours;
       const copiedData = this.data.slice();
       copiedData.push(x);
       this.dataChange.next(copiedData);

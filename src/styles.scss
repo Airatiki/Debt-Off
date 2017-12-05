@@ -49,10 +49,16 @@ $divider-color:        #BDBDBD;
   display: inline;
   margin: 0 auto;
 }
+
+.primary-button {
+  background-color: #6bb551;
+  //background-color: lightgreen;
+  color: white;
+}
 //
-//.flex-spacer {
-//  flex: 1 1 auto;
-//}
+.flex-spacer {
+  flex: 1 1 auto;
+}
 //
 //
 //

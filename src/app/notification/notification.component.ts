@@ -39,7 +39,8 @@ export class NotificationComponent implements OnInit {
 
   onAcceptInvoice(invoice, event: MouseEvent) {
     event.stopPropagation();
-    const user = invoice.creditorId;
+    console.log(invoice);
+    const user = invoice.target.id;
     this.userservice.acceptInvoice(invoice.id).subscribe(response => {
         this.router.navigate(['/home/userinfo/' + user], { relativeTo: this.route });
       },

@@ -23,6 +23,7 @@
 }
 
 .crop {
+  display: inline;
   width: 50%;
   height: 50%;
   border-radius: 50%;
@@ -42,8 +43,8 @@
   justify-content: space-between;
   padding: 0 23px;
   align-items: center;
-  /*font-size: 25px;*/
-  cursor: pointer;
+  font-size: 20px;
+  /*cursor: pointer;*/
 }
 
 .mat-row {
@@ -68,3 +69,15 @@
 .badge-danger {
   background-color: #dc3545;
 }
+
+@media (max-width: 600px) {
+  .example-container {
+  min-width: 100px;
+    font-size: 8px;
+  }
+
+}
+
+
+
+

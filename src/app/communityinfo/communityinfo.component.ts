@@ -71,12 +71,12 @@ export class CommunityinfoComponent implements OnInit {
       this.ngOnInit();
     });
   }
-
-  optimize() {
-    this.userservice.optimizeCommunity(this.community.id).subscribe(response => {
-      console.log(response);
-    });
-  }
+  //
+  // optimize() {
+  //   this.userservice.optimizeCommunity(this.community.id).subscribe(response => {
+  //     console.log(response);
+  //   });
+  // }
 
   showGraph() {
 

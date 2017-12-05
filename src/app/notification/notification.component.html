@@ -2,10 +2,10 @@
     <div class="col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-2">
     <div class="card">
       <div class="card-header text-center">
-        Invoices
+        Запросы на долг
       </div>
       <div class="spiner" *ngIf="!dataLoaded">
-        <mat-spinner></mat-spinner><h4>Loading...</h4>
+        <mat-spinner></mat-spinner><h4>Загрузка...</h4>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let notification of notifications; let i = index">
@@ -14,8 +14,8 @@
             {{notification.target.firstName}}
             <span class="right">
             <span class="badge badge-secondary" >{{notification.amount | currency:'RUB':'symbol'}}</span>
-            <button type="button" class="btn btn-success btn-xs" (click)="onAcceptInvoice(notification, $event)">Accept</button>
-            <button type="button" class="btn btn-danger btn-xs delete-btn" (click)="onDeclineInvoice(notification, $event)">Reject</button>
+            <button type="button" class="btn btn-success btn-xs" (click)="onAcceptInvoice(notification, $event)">Принять</button>
+            <button type="button" class="btn btn-danger btn-xs delete-btn" (click)="onDeclineInvoice(notification, $event)">х</button>
             </span>
           </div>
           <div class="preview-body" *ngIf="notification.clicked">
@@ -26,7 +26,7 @@
               </tr>
               <tr>
                 <th>Дата:</th>
-                <td>{{notification.time | date:'longDate'}}</td>
+                <td>{{notification.time | date:'medium'}}</td>
               </tr>
             </table>
           </div>

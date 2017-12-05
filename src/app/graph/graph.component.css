@@ -4,7 +4,14 @@
 
 mat-toolbar {
   background-color: #444444;
-  color: white;
+  color: wheat;
+  
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: 700;
+  
 }
 
 @media (max-width: 450px) {
@@ -17,3 +24,24 @@ mat-toolbar {
   }
   
 }
+
+.resizing {
+  max-width: 100px;
+  color: lightgreen;
+}
+
+.resizing button {
+  background-color: #444444;
+  color: white;
+  margin-top: 5px;
+}
+
+/*.resizing button:hover {*/
+  /*background-color: #444444;*/
+  /*color: white;*/
+  /*margin-top: 5px;*/
+/*}*/
+
+/*.resizing button:hover {*/
+  /*background-color: lightgreen;*/
+/*}*/

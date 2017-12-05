@@ -7,7 +7,7 @@ li.link-active a,
 li.link-active a:hover,
 li.link-active a:focus {
   background-color: #444444;
-  color: gold;
+  color: lightgreen;
 }
 
 /* Keep the nav menu independent of scrolling and on top of other items */
@@ -60,7 +60,7 @@ li.link-active a:focus {
   }
 
   .navbar li a:hover {
-    color: gold;
+    color: lightgreen;
   }
 
 
@@ -78,7 +78,7 @@ li.link-active a:focus {
 }
 
 h2 {
-  color: gold;
+  color: lightgreen;
 }
 
 /*@media (max-width: 728px) {*/
