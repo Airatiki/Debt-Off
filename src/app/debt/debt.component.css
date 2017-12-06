@@ -5,7 +5,7 @@
   /*min-width: 650px;*/
   /*min-height: 300px;*/
   /*max-height: 300px;*/
-  padding: 10px;
+  margin-top: 30px;
 }
 
 .example-header {
@@ -76,6 +76,14 @@
   /*min-height: 50px;*/
     font-size: 10px;
   }
+  .user-name {
+    display: none;
+    width: 0;
+    height: 0;
+    opacity:0;
+    visibility: collapse;
+  }
+
   mat-table, mat-header-cell, mat-cell  {
     font-size: 10px;
   }

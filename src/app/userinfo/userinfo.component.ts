@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Debt} from '../shared/Debt';
+import {User} from '../shared/User';
 
 @Component({
   selector: 'app-userinfo',
@@ -15,11 +16,7 @@ import {Debt} from '../shared/Debt';
   styleUrls: ['./userinfo.component.css']
 })
 export class UserinfoComponent implements OnInit {
-  submition = true;
-  showAddButton = true;
-  formCreated = false;
-  debtForm: FormGroup;
-  debt: Debt;
+
   formErrors = {
     'description': '',
     'amount': '',
@@ -36,28 +33,32 @@ export class UserinfoComponent implements OnInit {
       'pattern': 'Поле должно содержать только цифры'
     }
   };
+
+  showAddButton = true;
+  formCreated = false;
+  debtForm: FormGroup;
+  debt: Debt;
+
   displayedColumns = ['Description', 'Date', 'Amount'];
   database: any;
-  dataSource: ExampleDataSource | null;
+  dataSource: SummaryDataSource | null;
   @ViewChild(MdPaginator) paginator: MdPaginator;
 
   constructor(private route: ActivatedRoute, private userservice: UserService, private fb: FormBuilder) { }
-  user: any = {};
+  user: User;
   isUser = false;
   ngOnInit() {
-    console.log(this.paginator);
-    // this.database = new ExampleDatabase(this.userservice, this.route);
-    // this.dataSource = new ExampleDataSource(this.database, this.paginator);
-    this.database = new ExampleDatabase(this.userservice, this.route);
-
+    if (localStorage.getItem('currentUser') === null) {
+      // window.location.href = 'http://localhost:4200';
+      window.location.href = 'https://airatiki.github.io/Debt-Off';
+    }
+    this.database = new SummaryDataBase(this.userservice, this.route);
 
     this.route.params.switchMap((params: Params) => {
-      this.userservice.getUserInfo(params['id']).subscribe(data => {
-        this.user = data.json();
+      this.userservice.getUserInfo(params['id']).subscribe(user => {
+        this.user = user;
         this.isUser = true;
-        console.log('USER PRISHEL', this.isUser);
-        this.dataSource = new ExampleDataSource(this.database, this.paginator);
-
+        this.dataSource = new SummaryDataSource(this.database, this.paginator);
       });
       return params['id'];
     }).subscribe(() => {
@@ -75,10 +76,9 @@ export class UserinfoComponent implements OnInit {
       amount: ['', [Validators.required, Validators.pattern]],
       agree: false
     });
-
     this.debtForm.valueChanges.subscribe(data => this.onValueChanged(data));
-
   }
+
   onValueChanged(data?: any) {
     if (!this.debtForm) { return; }
     const form = this.debtForm;
@@ -97,27 +97,23 @@ export class UserinfoComponent implements OnInit {
 
   onSubmit() {
     const invoice = this.debtForm.value.agree;
-    console.log(this.debtForm.value.agree);
     this.debt = this.debtForm.value;
-    this.submition = false;
 
     if (invoice) {
-      this.userservice.createInvoice(this.user.info.id, this.debt.description, this.debt.amount)
+      this.userservice.createInvoice(this.user.id, this.debt.description, this.debt.amount)
         .subscribe(response => {
           console.log(response);
         });
 
     } else {
-      this.userservice.createDebt(this.user.info.id, this.debt.description, this.debt.amount)
-        .subscribe(response => {
+      this.userservice.createDebt(this.user.id, this.debt.description, this.debt.amount)
+        .subscribe(() => {
             this.ngOnInit();
-            console.log(response);
           },
           error => {
             console.log(error);
           });
     }
-
     this.cancelButton();
   }
 
@@ -126,9 +122,22 @@ export class UserinfoComponent implements OnInit {
     this.showAddButton = true;
     this.debtForm.reset();
   }
+
+  vkNavigate(event, id: number) {
+    event.stopPropagation();
+    window.open(
+      `https://vk.com/${id}`,
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  }
 }
 
-export class ExampleDatabase {
+export class SummaryDataBase {
+  header = {
+    plus: 'Вам должны: ',
+    minus: 'Вы должны: '
+  };
+  headerText = '';
   totalAmount = 0;
   /** Stream that emits whenever the data has been modified. */
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
@@ -151,10 +160,14 @@ export class ExampleDatabase {
       return total;
     }, 0);
 
+    if (this.totalAmount > 0) {
+      this.headerText = this.header.plus;
+    } else {
+      this.totalAmount *= -1;
+      this.headerText = this.header.minus;
+    }
+
     userHistory.forEach(x => {
-      // const date = new Date(x.time);
-      // const hours = date.getHours() + ':' + date.getMinutes();
-      // x.time = date.toDateString() + ' ' + hours;
       const copiedData = this.data.slice();
       copiedData.push(x);
       this.dataChange.next(copiedData);
@@ -165,12 +178,12 @@ export class ExampleDatabase {
 /**
  * Data source to provide what data should be rendered in the table. Note that the data source
  * can retrieve its data in any way. In this case, the data source is provided a reference
- * to a common data base, ExampleDatabase. It is not the data source's responsibility to manage
+ * to a common data base, SummaryDataBase. It is not the data source's responsibility to manage
  * the underlying data. Instead, it only needs to take the data and send the table exactly what
  * should be rendered.
  */
-export class ExampleDataSource extends DataSource<any> {
-  constructor(private _creditsDatabase: ExampleDatabase, private _creditsPaginator: MdPaginator) {
+export class SummaryDataSource extends DataSource<any> {
+  constructor(private _creditsDatabase: SummaryDataBase, private _creditsPaginator: MdPaginator) {
     super();
   }
 

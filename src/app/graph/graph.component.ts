@@ -18,22 +18,17 @@ export class GraphComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.community.id);
-    this.userservice.showCommunityGraph(this.community.id).subscribe(data => {
-      console.log('DATA OT GRAPHA');
-      console.log(data);
+    this.userservice.showCommunityGraph(this.community.id).subscribe(() => {
       this.path = this.sanitization
         .bypassSecurityTrustResourceUrl(`https://debtoff.azurewebsites.net/api/community/${this.community.id}/graph`);
       this.graphLoaded = true;
-      // this.path = data;
     });
   }
 
   optimizeGraph() {
     this.graphLoaded = false;
 
-    this.userservice.optimizeCommunity(this.community.id).subscribe(response => {
-      console.log('Response', response);
-      // this.graphLoaded = true;
+    this.userservice.optimizeCommunity(this.community.id).subscribe(() => {
       this.ngOnInit();
     });
   }

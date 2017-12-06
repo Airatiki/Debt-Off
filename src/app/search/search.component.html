@@ -1,6 +1,3 @@
-
-<!--<div class="row col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-2">-->
-<!--<div class="col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-2">-->
 <div class="row">
 <div class="col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-2 col-xs-12 ">
 
@@ -68,12 +65,13 @@
             <tbody>
             <tr *ngIf="resultsCommunity.length === 0">
               <td>
-                Nothing to show...
+                Ничего не найдено...
               </td>
             </tr>
             <tr *ngFor="let result of resultsCommunity" (click)="onCommunityClick(result)">
               <td width="10">
-                <img class="pull-left img-circle nav-user-photo" width="50" src="../../assets/community.jpg" />  
+                <!--src="/Debt-Off/assets/community.jpg"-->
+                <img class="pull-left img-circle nav-user-photo" width="50" src="/Debt-Off/assets/community.jpg" />  
               </td>
               <td>
                 {{result.name}}<br><i class="fa fa-envelope"></i>

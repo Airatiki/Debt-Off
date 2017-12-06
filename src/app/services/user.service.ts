@@ -6,18 +6,21 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
-import {DomSanitizer} from '@angular/platform-browser';
+import {User, UserSummary} from '../shared/User';
+import {Community} from '../shared/Community';
+import {UserInfo} from '../shared/User';
+import {NotificationStore} from '../shared/Notification';
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: Http, private sanitization: DomSanitizer) { }
+  constructor(private http: Http) { }
 
-  getUserSelf() {
-    return this.http.get(BASE_URL + '/user/self', this.jwt());
+  getUserSelf(): Observable<UserInfo> {
+    return this.http.get(BASE_URL + '/user/self', this.jwt()).map(data => data.json());
   }
-  getUserSummary() {
-    return this.http.get(BASE_URL + '/loan/summary', this.jwt());
+  getUserSummary(): Observable<UserSummary> {
+    return this.http.get(BASE_URL + '/loan/summary', this.jwt()).map(data => data.json());
   }
   getUserHistory(id): Observable<any> {
     console.log('HISTORY', id);
@@ -37,44 +40,25 @@ export class UserService {
       });
   }
 
-  searchUsers(terms: Observable<string>) {
-
-    return terms.debounceTime(400)
-      .distinctUntilChanged()
-      .filter((str) => str.length > 0)
-      .switchMap(term => this.searchEntries(term, 'user'));
-  }
-
-  searchCommunity(terms: Observable<string>) {
-    return terms.debounceTime(400)
-      .distinctUntilChanged()
-      .filter((str) => str.length > 0)
-      .switchMap(term => this.searchEntries(term, 'community'));
-  }
-
   searchEntries(term, entity) {
     return this.http
       .get(BASE_URL + `/${entity}/search?pattern=` + term, this.jwt())
       .map(res => res.json());
   }
 
-  getUserInfo(id) {
+  getUserInfo(id): Observable<User> {
     console.log('LIZA ++++++', id);
-    return this.http.get(BASE_URL + '/user/' + id, this.jwt());
-  }
-
-  getUsers() {
-    return this.http.get(BASE_URL + '/user/search', this.jwt());
+    return this.http.get(BASE_URL + '/user/' + id, this.jwt()).map(data => data.json().info);
   }
 
   getCommunityInfo(id) {
-    return this.http.get(BASE_URL + '/community/' + id, this.jwt());
+    return this.http.get(BASE_URL + '/community/' + id, this.jwt()).map(data => data.json());
   }
-  getCommunities() {
-    return this.http.get(BASE_URL + '/community', this.jwt());
+  getCommunities(): Observable<Community[]> {
+    return this.http.get(BASE_URL + '/community', this.jwt()).map(data => data.json());
   }
-  getNotifications() {
-    return this.http.get(BASE_URL + '/invoice/user', this.jwt());
+  getNotifications(): Observable<NotificationStore> {
+    return this.http.get(BASE_URL + '/invoice/user', this.jwt()).map(data => data.json());
   }
   acceptInvoice(id: number) {
     console.log(this.jwt());
@@ -90,9 +74,6 @@ export class UserService {
     });
   }
 
-  searchCommunities() {
-    return this.http.get(BASE_URL + '/community/search', this.jwt());
-  }
   joinCommunity(id: number) {
     return this.http.post(BASE_URL + '/community/' + id + '/join', {},
       this.jwt()).map((response: Response) => {
@@ -125,7 +106,7 @@ export class UserService {
   }
 
 
-  createDebt(creditorId: number, description: string, amount: number) {
+  createDebt(creditorId: string, description: string, amount: number) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       const headers = new Headers({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + currentUser});
@@ -142,7 +123,7 @@ export class UserService {
     }
   }
 
-  createInvoice(debtorId: number, description: string, amount: number) {
+  createInvoice(debtorId: string, description: string, amount: number) {
     console.log(debtorId);
     return this.http.post(BASE_URL + '/invoice/' + debtorId,
       JSON.stringify({description: description, amount: amount, time: (new Date()).toISOString()}), this.postJWT())
@@ -167,6 +148,4 @@ export class UserService {
       return new RequestOptions({ headers: headers });
     }
   }
-
-
 }

@@ -27,9 +27,8 @@ export class DebtComponent implements OnInit {
   dataLoaded = false;
   creditsDatabase: any;
   debtsDatabase: any;
-  dataCredits: ExampleDataSource | null;
-  dataDebts: ExampleDataSource | null;
-  isUser = false;
+  dataCredits: SummaryDataSource | null;
+  dataDebts: SummaryDataSource | null;
 
   @ViewChild(MdPaginator) paginator: MdPaginator;
   @ViewChild('debtsPaginator') debtsPaginator: MdPaginator;
@@ -37,66 +36,53 @@ export class DebtComponent implements OnInit {
   constructor(public nav: NavbarService, private userservice: UserService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit() {
-    this.debtsDatabase = new ExampleDatabase(this.userservice, false);
-    this.dataDebts = new ExampleDataSource(this.debtsDatabase, this.debtsPaginator);
+    if (localStorage.getItem('currentUser') === null) {
+      // window.location.href = 'http://localhost:4200';
+      window.location.href = 'https://airatiki.github.io/Debt-Off';
+    }
+    this.userservice.getUserSummary().subscribe( data => {
+      this.dataLoaded = true;
+      this.debtsDatabase = new DataBase(data.debts);
+      this.dataDebts = new SummaryDataSource(this.debtsDatabase, this.debtsPaginator);
 
-    this.creditsDatabase = new ExampleDatabase(this.userservice, true);
-    this.dataCredits = new ExampleDataSource(this.creditsDatabase, this.paginator);
-    // this.isUser = true;
+      this.creditsDatabase = new DataBase(data.credits);
+      this.dataCredits = new SummaryDataSource(this.creditsDatabase, this.paginator);
+    });
   }
 
   onUserClick(user) {
     this.router.navigate(['/home/userinfo/' + user.id], { relativeTo: this.route });
   }
 
+  vkNavigate(event, id: number) {
+    event.stopPropagation();
+    window.open(
+      `https://vk.com/${id}`,
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  }
+
 }
 
-let totalDebtsAmountans: any = {};
 
-
-export class ExampleDatabase {
+export class DataBase {
   /** Stream that emits whenever the data has been modified. */
-  totalDebts = 0;
-  totalCredits = 0;
+  totalAmount = 0;
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  get data(): any[] { return this.dataChange.value; }
-
-  constructor(private userservice: UserService, private isCredit: boolean) {
-    console.log('EXAMPLE START, LOANS ');
-    // console.log(loans);
-    this.isCredit ? this.addCredits() : this.addDebts();
+  get data(): any[] {
+    return this.dataChange.value;
   }
 
-  addDebts() {
-    this.userservice.getUserSummary().subscribe(data => {
-      totalDebtsAmountans = data.json();
-      this.totalDebts = totalDebtsAmountans.debts.reduce((total, {totalAmount}) => total += totalAmount, 0);
-      for (let i = 0; i < totalDebtsAmountans.debts.length; i++) {
-        const date = new Date(totalDebtsAmountans.debts[i].time);
-        const hours = date.getHours() + ':' + date.getMinutes();
-        totalDebtsAmountans.debts[i].time = date.toDateString() + ' ' + hours;
-        const copiedData = this.data.slice();
-        copiedData.push(totalDebtsAmountans.debts[i]);
-        this.dataChange.next(copiedData);
-      }
-    });
-
+  constructor(private credits) {
+    this.addData();
   }
-  /** Adds a new user to the database. */
-  // TODO: Add error checking
-  addCredits() {
-    this.userservice.getUserSummary().subscribe(data => {
-      totalDebtsAmountans = data.json();
-      this.totalCredits = totalDebtsAmountans.credits.reduce((total, {totalAmount}) => total += totalAmount, 0);
-      console.log(totalDebtsAmountans.credits.totalAmount);
-      for (let i = 0; i < totalDebtsAmountans.credits.length; i++) {
-        const date = new Date(totalDebtsAmountans.credits[i].time);
-        const hours = date.getHours() + ':' + date.getMinutes();
-        totalDebtsAmountans.credits[i].time = date.toDateString() + ' ' + hours;
-        const copiedData = this.data.slice();
-        copiedData.push(totalDebtsAmountans.credits[i]);
-        this.dataChange.next(copiedData);
-      }
+
+  addData() {
+    this.totalAmount = this.credits.reduce((total, {totalAmount}) => total += totalAmount, 0);
+    this.credits.forEach(x => {
+      const copiedData = this.data.slice();
+      copiedData.push(x);
+      this.dataChange.next(copiedData);
     });
   }
 }
@@ -104,12 +90,12 @@ export class ExampleDatabase {
 /**
  * Data source to provide what data should be rendered in the table. Note that the data source
  * can retrieve its data in any way. In this case, the data source is provided a reference
- * to a common data base, ExampleDatabase. It is not the data source's responsibility to manage
+ * to a common data base, DataBase. It is not the data source's responsibility to manage
  * the underlying data. Instead, it only needs to take the data and send the table exactly what
  * should be rendered.
  */
-export class ExampleDataSource extends DataSource<any> {
-  constructor(private _creditsDatabase: ExampleDatabase, private _creditsPaginator: MdPaginator) {
+export class SummaryDataSource extends DataSource<any> {
+  constructor(private _creditsDatabase: DataBase, private _creditsPaginator: MdPaginator) {
     super();
   }
 

@@ -41,7 +41,7 @@
   text-align: center;
 }
 
-/*md-slide-toggle {*/
-  /*color: blue;*/
-/*}*/
+a {
+  cursor: pointer;
+}
 

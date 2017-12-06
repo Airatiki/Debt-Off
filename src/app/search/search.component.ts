@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/startWith';
@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import {User} from '../shared/User';
+import {Community} from '../shared/Community';
 
 @Component({
   selector: 'app-search',
@@ -19,12 +21,11 @@ export class SearchComponent implements OnInit {
   ];
   dataLoaded= true;
   isUserShown = true;
-  resultsUser: any[];
-  resultsCommunity: any[];
+  resultsUser: User[];
+  resultsCommunity: Community[];
   searchTerm$ = new Subject<string>();
 
   constructor(private userservice: UserService, private router: Router, private route: ActivatedRoute) {
-    // this.userservice.searchUsers(this.searchTerm$).subscribe(results => this.resultsUser = results.users);
     this.search(this.searchTerm$, this.searching[0].value).subscribe(results => {
       this.resultsUser = results.users;
       this.dataLoaded = true;
@@ -33,7 +34,10 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (localStorage.getItem('currentUser') === null) {
+      // window.location.href = 'http://localhost:4200';
+      window.location.href = 'https://airatiki.github.io/Debt-Off';
+    }
   }
 
   search(terms: Observable<string>, entity) {
@@ -63,7 +67,7 @@ export class SearchComponent implements OnInit {
       this.search(this.searchTerm$, this.searching[0].value).subscribe(results => {
         this.resultsUser = results.users;
         this.dataLoaded = true;
-    });
+      });
     } else {
       this.search(this.searchTerm$, this.searching[1].value).subscribe(results => {
         this.resultsCommunity = results.communities;

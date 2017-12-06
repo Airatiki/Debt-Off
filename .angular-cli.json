@@ -33,10 +33,7 @@
         "assets/js/parallax.min.js",
         "assets/js/para.js",
         "assets/js/main.js",
-        "assets/js/owl.carousel.js",
-        "assets/js/jquery.magnific-popup.min.js",
         "assets/js/bootstrap.min.js",
-        "assets/js/html5shiv.min.js",
         "assets/js/myjs.js"
       ],
       "environmentSource": "environments/environment.ts",

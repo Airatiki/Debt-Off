@@ -1,5 +1,9 @@
+/*
+  THIS COMPONENT IS NOT USED AFTER ADDING VK AUTHORIZATION (MAY BE THE PROJECT STRUCTURE
+  WILL BE CHANGED AND COMPONENT WILL BE USEFUL).
+ */
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef} from '@angular/material';
+import { MdDialogRef} from '@angular/material';
 import {AuthenticationService} from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 

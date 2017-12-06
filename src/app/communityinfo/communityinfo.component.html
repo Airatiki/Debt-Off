@@ -24,8 +24,8 @@
       </ng-container>
 
       <ng-container matColumnDef="userName">
-        <mat-header-cell *matHeaderCellDef > Никнейм </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.userName}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef > Ссылка </mat-header-cell>
+        <mat-cell *matCellDef="let row"> <a (click)="vkNavigate($event, row.userName)"> {{row.userName}}</a> </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

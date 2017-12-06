@@ -1,7 +1,7 @@
 <div class="row">
 
   <div  class="mat-elevation-z8 col-md-5 col-md-push-1">
-    <h3>Итого: {{database.totalAmount}} </h3>
+    <h3>{{database.headerText}} {{database.totalAmount}} <span class="fa fa-rub"></span> </h3>
 
     <div class="spiner" *ngIf="!isUser">
     <mat-spinner></mat-spinner><h4>Загрузка...</h4>
@@ -22,7 +22,6 @@
         <mat-header-cell *matHeaderCellDef > Сумма </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span class="badge" [style.background-color] = "row.color">{{row.amount | currency:'RUB':'symbol'}}</span>
-          <!--{{row.amount | currency:'RUB':'symbol'}} -->
         </mat-cell>
       </ng-container>
 
@@ -46,13 +45,12 @@
   <mat-card class="user-info">
     <mat-card-header class="title">
       <mat-card-title>
-        <h3>{{user.info.firstName}}</h3>
+        <h3>{{user.firstName}}</h3>
       </mat-card-title>
     </mat-card-header>
-    <img mat-card-image class="imgProfil" src={{user.info.avatarUri}} onerror="this.src='../assets/anonim.png'" >
+    <img mat-card-image class="imgProfil" src={{user.avatarUri}} onerror="this.src='../assets/anonim.png'" >
     <mat-card-content>
-      <p>Никнейм: {{user.info.userName}}</p>
-      <p>Email: {{user.info.email}}</p>
+      <p><a (click)="vkNavigate($event, user.userName)">vk.com/{{user.userName}}</a></p>
 
       <button mat-button (click)="addDebt()" class="primary-button" *ngIf="showAddButton">Добавить долг</button>
 
@@ -81,9 +79,4 @@
     </mat-card-content>
   </mat-card>
 </div>
-<!--</div>-->
-
-
-
-
 </div>

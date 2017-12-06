@@ -1,8 +1,14 @@
+import {User} from './User';
+
 export class Notification {
   id: number;
-  creditorId: number;
-  debtorId: number;
+  target: User;
   amount: number;
-  time: string;
+  time: Date;
   description: string;
+}
+
+export class NotificationStore {
+  ingoing?: Notification[];
+  outgoing?: Notification[];
 }

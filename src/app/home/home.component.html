@@ -5,8 +5,8 @@
         <h1>Debt'off</h1>
         <mat-list>
           <mat-list-item style="color: wheat">
-            <img mat-list-avatar src={{user.info.avatarUri}}>
-            <h4  mat-line>{{user.info.firstName}}</h4>
+            <img mat-list-avatar src={{user.avatarUri}}>
+            <h4  mat-line>{{user.firstName}}</h4>
           </mat-list-item>
         </mat-list>
         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
@@ -16,7 +16,6 @@
           <span class='icon-bar'></span>
         </button>
       </div>
-
     </div>
 
     <!--<a class='navbar-brand' [routerLink]="['/home']">Loans</a>-->
@@ -25,22 +24,22 @@
     <div id="myNavmenu" class='navbar-collapse collapse'>
       <ul class='nav navbar-nav'>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/home/debts']">
+          <a [routerLink]="['/home/debts']" (click)="onMenuClick($event)">
             <span class='glyphicon glyphicon-home'></span> Долги
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/home/search']">
+          <a [routerLink]="['/home/search']" (click)="onMenuClick($event)">
             <span class='glyphicon glyphicon-search'></span> Поиск
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/home/communities']">
+          <a [routerLink]="['/home/communities']" (click)="onMenuClick($event)">
             <span class='glyphicon glyphicon-user'></span> Группы
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/home/notifications']">
+          <a [routerLink]="['/home/notifications']" (click)="onMenuClick($event)">
             <span class='glyphicon glyphicon-bell'></span> Уведомления
           </a>
         </li>

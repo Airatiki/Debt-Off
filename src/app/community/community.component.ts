@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Community} from '../shared/Community';
@@ -13,58 +12,40 @@ import {Community} from '../shared/Community';
 export class CommunityComponent implements OnInit {
 
   dataLoaded = false;
-  submition = true;
   showCreateButton = true;
   formCreated = false;
   communityForm: FormGroup;
-  community: Community;
+  communityToSubmit: Community;
   formErrors = {
     'name': ''
   };
 
   validationMessages = {
     'name': {
-      'required': 'Name is required.',
-      'minlength': 'Name must be at least 2 ch long',
-      'maxlength': 'Name must be less than 25 ch long'
+      'required': 'Обязательное поле.',
+      'minlength': 'Поле должно содержать не менее 2 символов',
+      'maxlength': 'Поле должно содержать менее 25 символов'
     }
   };
-  communities: any[];
-  selectedCommunity: Object = {};
-
-  myControl: FormControl;
-
-  options = [
-    'One',
-    'Two',
-    'Three'
-  ];
-
-  filteredOptions: Observable<string[]>;
+  communities: Community[];
 
 
   constructor(private userservice: UserService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
-    this.myControl = new FormControl();
   }
 
   ngOnInit() {
+    if (localStorage.getItem('currentUser') === null) {
+      // window.location.href = 'http://localhost:4200';
+      window.location.href = 'https://airatiki.github.io/Debt-Off';
+    }
     this.getCommunities();
-    this.filteredOptions = this.myControl.valueChanges
-      .startWith(null)
-      .map(val => val ? this.filter(val) : this.options.slice());
-  }
-
-  filter(val: string): string[] {
-    return this.options.filter(option =>
-      option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
   getCommunities() {
     this.userservice.getCommunities()
       .subscribe(data => {
         this.dataLoaded = true;
-        this.communities = data.json();
-        console.log(this.communities);
+        this.communities = data;
       }, error => {
         console.log(error);
       });
@@ -74,13 +55,9 @@ export class CommunityComponent implements OnInit {
     this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`], { relativeTo: this.route });
   }
 
-  onChange(community) {
-    this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`], { relativeTo: this.route });
-  }
   createCommunity() {
     this.createForm();
     this.showCreateButton = false;
-    console.log('kek');
   }
 
   createForm() {
@@ -110,26 +87,22 @@ export class CommunityComponent implements OnInit {
   }
 
   onSubmit() {
-    this.community = this.communityForm.value;
-    this.submition = false;
-    this.userservice.createCommunity(this.community.name)
+    this.communityToSubmit = this.communityForm.value;
+    this.cancelButton();
+
+    this.userservice.createCommunity(this.communityToSubmit.name)
       .subscribe(response => {
-          console.log(response);
+          this.communityForm.reset({});
+          this.ngOnInit();
         },
         error => {
           console.log(error);
         });
-
-    this.communityForm.reset({
-      description: '',
-      amount: ''
-    });
   }
 
   cancelButton() {
     this.formCreated = false;
     this.showCreateButton = true;
-
   }
 
 }

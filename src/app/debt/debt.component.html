@@ -8,22 +8,16 @@
 <div class="row col-md-8 col-md-offset-2 col-sm-12">
 
 <div  class="example-container mat-elevation-z8">
+  <div class="spiner" *ngIf="!dataLoaded">
+    <mat-spinner></mat-spinner><h4>Загрузка...</h4>
+  </div>
   <!--<h3>CREDITS, <span class="total">{{totalCreditsAmount}}</span></h3>-->
-  <div class="preview-title">
+  <div class="preview-title" *ngIf="dataLoaded">
     Кредиты
-    <span>Итого: <strong>{{creditsDatabase.totalCredits | currency:'RUB':'symbol'}}</strong></span>
+    <span>Итого: <strong>{{creditsDatabase.totalAmount | currency:'RUB':'symbol'}}</strong></span>
   </div>
 
-  <!--<div class="spiner" *ngIf="!isUser">-->
-    <!--<mat-spinner></mat-spinner><h4>Loading...</h4>-->
-  <!--</div>-->
-
-  <!--//,  Total Amount: {{totalCreditsAmount}}-->
-
-  <mat-table  #table [dataSource]="dataCredits">
-    <div class="spiner" *ngIf="!isUser">
-      <mat-spinner></mat-spinner><h4>Загрузка...</h4>
-    </div>
+  <mat-table  #table [dataSource]="dataCredits" >
 
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef> Аватар </mat-header-cell>
@@ -31,8 +25,8 @@
     </ng-container>
 
     <ng-container matColumnDef="userName">
-      <mat-header-cell *matHeaderCellDef> Никнейм </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.user.userName}} </mat-cell>
+      <mat-header-cell class="user-name" *matHeaderCellDef> Ссылка </mat-header-cell>
+      <mat-cell class="user-name" *matCellDef="let row"> <a (click)="vkNavigate($event, row.user.userName)"> {{row.user.userName}}</a> </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="FirstName">
@@ -60,9 +54,9 @@
 
   <mat-paginator #paginator
                  id="creditsPaginator"
-                 [length]="creditsDatabase.data.length"
+                 [length]="creditsDatabase ? creditsDatabase.data.length : 0"
                  [pageIndex]="0"
-                 [pageSize]="25"
+                 [pageSize]="5"
                  [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>
@@ -73,37 +67,40 @@
 
 
 <div  class="example-container mat-elevation-z8">
-  <div class="preview-title">
+  <div class="spiner" *ngIf="!dataLoaded">
+    <mat-spinner></mat-spinner><h4>Загрузка...</h4>
+  </div>
+  <div class="preview-title" *ngIf="dataLoaded">
     Долги
-    <span>Итого: <strong>{{debtsDatabase.totalDebts | currency:'RUB':'symbol'}}</strong></span>
+    <span>Итого: <strong>{{debtsDatabase.totalAmount | currency:'RUB':'symbol'}}</strong></span>
   </div>
   <!--,  Total Amount: {{totalDebtsAmount}}-->
 
   <mat-table #tabl [dataSource]="dataDebts">
 
     <ng-container matColumnDef="avatar">
-      <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Аватар </mat-header-cell>
       <mat-cell *matCellDef="let row"> <img class="crop" src={{row.user.avatarUri}} onerror="this.src='../assets/anonim.png'"> </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="userName">
-      <mat-header-cell *matHeaderCellDef> UserName </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.user.userName}} </mat-cell>
+      <mat-header-cell class="user-name" *matHeaderCellDef> Ссылка </mat-header-cell>
+      <mat-cell class="user-name" *matCellDef="let row"> <a (click)="vkNavigate($event, row.user.userName)"> {{row.user.userName}}</a> </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="FirstName">
-      <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.user.firstName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="LastName">
-      <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Фамилия </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
     </ng-container>
 
     <!-- Color Column -->
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Сумма </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span automation-id="price" class="badge badge-danger">{{row.totalAmount | currency:'RUB':'symbol'}}</span>
         <!--{{row.totalAmount}} -->
@@ -116,9 +113,9 @@
 
   <mat-paginator #debtsPaginator
                  id="debtsPaginator"
-                 [length]="debtsDatabase.data.length"
+                 [length]="debtsDatabase ? debtsDatabase.data.length : 0"
                  [pageIndex]="0"
-                 [pageSize]="25"
+                 [pageSize]="5"
                  [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>
