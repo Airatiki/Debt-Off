@@ -2,7 +2,7 @@
 .example-container {
   display: flex;
   flex-direction: column;
-  min-width: 650px;
+  /*min-width: 650px;*/
   /*min-height: 300px;*/
   /*max-height: 300px;*/
   padding: 10px;
@@ -70,13 +70,23 @@
   background-color: #dc3545;
 }
 
-/*@media (max-width: 600px) {*/
-  /*.example-container {*/
+@media (max-width: 600px) {
+  .preview-title {
   /*min-width: 100px;*/
-    /*font-size: 8px;*/
-  /*}*/
+  /*min-height: 50px;*/
+    font-size: 10px;
+  }
+  mat-table, mat-header-cell, mat-cell  {
+    font-size: 10px;
+  }
+  .badge {
+    font-size: 5px;
+  }
+  .mat-paginator {
+    font-size: 7px;
+  }
 
-/*}*/
+}
 
 
 
