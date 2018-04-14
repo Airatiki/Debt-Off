@@ -23,7 +23,6 @@ export class UserService {
     return this.http.get(BASE_URL + '/loan/summary', this.jwt()).map(data => data.json());
   }
   getUserHistory(id): Observable<any> {
-    console.log('HISTORY', id);
     return this.http.get(BASE_URL + '/loan/user/' + id, this.jwt())
       .map(data => {
         const credits = data.json().credits.map(x => Object.assign({...x}, {color: '#28a745'}));

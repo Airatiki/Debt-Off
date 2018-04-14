@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {UserService} from '../services/user.service';
 import 'rxjs/add/operator/switchMap';
-import {MdPaginator} from '@angular/material';
+import {MatPaginator} from '@angular/material';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -42,15 +42,15 @@ export class UserinfoComponent implements OnInit {
   displayedColumns = ['Description', 'Date', 'Amount'];
   database: any;
   dataSource: SummaryDataSource | null;
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private route: ActivatedRoute, private userservice: UserService, private fb: FormBuilder) { }
   user: User;
   isUser = false;
   ngOnInit() {
     if (localStorage.getItem('currentUser') === null) {
-      // window.location.href = 'http://localhost:4200';
-      window.location.href = 'https://airatiki.github.io/Debt-Off';
+      window.location.href = 'http://localhost:4200';
+      // window.location.href = 'https://airatiki.github.io/Debt-Off';
     }
     this.database = new SummaryDataBase(this.userservice, this.route);
 
@@ -183,7 +183,7 @@ export class SummaryDataBase {
  * should be rendered.
  */
 export class SummaryDataSource extends DataSource<any> {
-  constructor(private _creditsDatabase: SummaryDataBase, private _creditsPaginator: MdPaginator) {
+  constructor(private _creditsDatabase: SummaryDataBase, private _creditsPaginator: MatPaginator) {
     super();
   }
 

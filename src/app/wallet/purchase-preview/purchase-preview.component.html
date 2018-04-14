@@ -1,0 +1,68 @@
+<div *ngIf="!isEdit" (click)="onClick()"
+     automation-id="header"
+     class="d-flex justify-content-between align-items-center preview-title">
+  {{purchase.title}}
+  <span class="badge badge-secondary" automation-id="price">{{purchase.price | currency:'RUB':''}}</span>
+  <span class="badge badge-danger delete-btn" (click)="onDeleteClick($event)">&times;</span>
+</div>
+
+<div class="preview-body" *ngIf="isOpen && !isEdit" automation-id="preview-body">
+  <table class="details">
+    <tr>
+      <th>Дата:</th>
+      <td automation-id="date">{{purchase.date | date:'longDate'}}</td>
+    </tr>
+    <tr *ngIf="purchase.comment">
+      <th>Комментарий:</th>
+      <td automation-id="comment">{{purchase.comment}}</td>
+    </tr>
+  </table>
+  <button automation-id="begin-edit-btn" class="btn btn-warning btn-block" (click)="onEditClick()">Редактировать</button>
+</div>
+
+<div class="preview-body" automation-id="edit-purchase-form" *ngIf="isEdit && isOpen" >
+<form [formGroup]="editForm" (submit)="onSubmit()">
+  <div class="form-group">
+    <input formControlName="title"
+           type="text"
+           class="form-control"
+           placeholder="Название">
+    <div class="invalid-feedback">
+      {{editForm.get('title').errors && getErrors(editForm.get('title').errors)}}
+    </div>
+  </div>
+  <div class="form-group">
+    <input formControlName="price"
+           type="text"
+           class="form-control"
+           placeholder="Стоимость">
+    <div class="invalid-feedback">
+      {{editForm.get('price').errors && getErrors(editForm.get('price').errors)}}
+    </div>
+  </div>
+  <div class="form-group">
+    <input formControlName="date"
+           type="date"
+           class="form-control"
+           placeholder="Дата">
+  </div>
+  <div class="form-group">
+    <textarea formControlName="comment"
+              class="form-control">
+    </textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit"
+            [disabled]="editForm.pristine || editForm.invalid"
+            class="btn btn-success btn-block">Готово
+    </button>
+  </div>
+  <div class="form-group">
+    <button type=button
+            automation-id="cancel-edit-btn"
+            class="btn btn-danger btn-block"
+            (click)="onCancelEdit()">Отмена
+    </button>
+  </div>
+</form>
+</div>

@@ -8,6 +8,7 @@ import {SearchComponent} from '../search/search.component';
 import {CommunityComponent} from '../community/community.component';
 import {CommunityinfoComponent} from '../communityinfo/communityinfo.component';
 import {NotificationComponent} from '../notification/notification.component';
+import {WalletListComponent} from '../wallet-list/wallet-list.component';
 
 export const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path: 'home/communities', component: CommunityComponent },
   {path: 'home/userinfo/:id', component: UserinfoComponent},
   {path: 'home/notifications', component: NotificationComponent},
+  {path: 'home/wallets', component: WalletListComponent},
   {path: 'home/communityinfo/:id/:name', component: CommunityinfoComponent},
   {path: '', redirectTo: '/header', pathMatch: 'full'}
 ];

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {NavbarService} from '../services/navbar.service';
 import {UserService} from '../services/user.service';
 import {DataSource} from '@angular/cdk/collections';
-import {MdPaginator} from '@angular/material';
+import {MatPaginator} from '@angular/material';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -30,15 +30,15 @@ export class DebtComponent implements OnInit {
   dataCredits: SummaryDataSource | null;
   dataDebts: SummaryDataSource | null;
 
-  @ViewChild(MdPaginator) paginator: MdPaginator;
-  @ViewChild('debtsPaginator') debtsPaginator: MdPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('debtsPaginator') debtsPaginator: MatPaginator;
 
   constructor(public nav: NavbarService, private userservice: UserService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit() {
     if (localStorage.getItem('currentUser') === null) {
-      // window.location.href = 'http://localhost:4200';
-      window.location.href = 'https://airatiki.github.io/Debt-Off';
+      window.location.href = 'http://localhost:4200';
+      // window.location.href = 'https://airatiki.github.io/Debt-Off';
     }
     this.userservice.getUserSummary().subscribe( data => {
       this.dataLoaded = true;
@@ -95,7 +95,7 @@ export class DataBase {
  * should be rendered.
  */
 export class SummaryDataSource extends DataSource<any> {
-  constructor(private _creditsDatabase: DataBase, private _creditsPaginator: MdPaginator) {
+  constructor(private _creditsDatabase: DataBase, private _creditsPaginator: MatPaginator) {
     super();
   }
 

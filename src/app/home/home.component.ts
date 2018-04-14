@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
     this.loadUser();
     this.nav.show();
     if (localStorage.getItem('currentUser') === null) {
-      // window.location.href = 'http://localhost:4200';
-      window.location.href = 'https://airatiki.github.io/Debt-Off';
+      window.location.href = 'http://localhost:4200';
+      // window.location.href = 'https://airatiki.github.io/Debt-Off';
     }
   }
 
@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
 
   loadUser() {
     this.userservice.getUserSelf().subscribe(user => {
+      localStorage.setItem('userEmail', user.info.email);
       this.user = user.info;
       this.isUser = true;
     });

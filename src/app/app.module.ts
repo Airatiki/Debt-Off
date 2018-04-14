@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {LOCALE_ID, NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MaterialModule} from '@angular/material';
+// import {MaterialModule} from '@angular/material';
 import { HttpModule } from '@angular/http';
 
 import {AuthenticationService} from './services/authentication.service';
@@ -17,7 +17,11 @@ import { FormsModule } from '@angular/forms';
 import 'hammerjs';
 import { HomeComponent } from './home/home.component';
 import { DebtComponent } from './debt/debt.component';
-import {NoConflictStyleCompatibilityMode} from '@angular/material';
+import {
+  MatButtonModule,
+  MatInputModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
+  NoConflictStyleCompatibilityMode
+} from '@angular/material';
 import { UserinfoComponent } from './userinfo/userinfo.component';
 import { SearchComponent } from './search/search.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -25,6 +29,14 @@ import { CommunityComponent } from './community/community.component';
 import { CommunityinfoComponent } from './communityinfo/communityinfo.component';
 import { NotificationComponent } from './notification/notification.component';
 import { GraphComponent } from './graph/graph.component';
+import {WalletListModule} from './wallet-list/wallet-list.module';
+import {HttpClientModule} from '@angular/common/http';
+
+import {MatTableModule} from '@angular/material/table';
+import {MatListModule} from '@angular/material/list';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -43,14 +55,26 @@ import { GraphComponent } from './graph/graph.component';
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
+    WalletListModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
     AppRoutingModule,
     HttpModule,
     NoConflictStyleCompatibilityMode,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [AuthenticationService, UserService, NavbarService, {provide: LOCALE_ID, useValue: 'ru'}],

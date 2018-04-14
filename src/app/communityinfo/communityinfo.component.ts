@@ -5,7 +5,7 @@ import {FormBuilder} from '@angular/forms';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {GraphComponent} from '../graph/graph.component';
 import {User} from '../shared/User';
 import {CommunityInfo} from '../shared/CommunityInfo';
@@ -24,12 +24,12 @@ export class CommunityinfoComponent implements OnInit {
   toJoin = false;
   constructor(private route: ActivatedRoute, private router: Router,
               private userservice: UserService, private fb: FormBuilder,
-              private dialog: MdDialog) { }
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     if (localStorage.getItem('currentUser') === null) {
-      // window.location.href = 'http://localhost:4200';
-      window.location.href = 'https://airatiki.github.io/Debt-Off';
+      window.location.href = 'http://localhost:4200';
+      // window.location.href = 'https://airatiki.github.io/Debt-Off';
     }
     this.route.params.switchMap((params: Params) => {
       this.userservice.getCommunityInfo(params['id']).subscribe(communityInfo => {

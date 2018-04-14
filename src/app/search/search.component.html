@@ -5,12 +5,13 @@
 <mat-input-container class="input-container">
   <input matInput placeholder="Поиск" (keyup)="searchTerm$.next($event.target.value)">
 </mat-input-container>
-
+<mat-input-container class="input-container">
 <mat-select placeholder="Фильтр" [value]="searching[0].value" (valueChange)="onSelectChange($event)">
   <mat-option *ngFor="let search of searching" [value]="search.value">
     {{ search.viewValue }}
   </mat-option>
 </mat-select>
+</mat-input-container>
 </div>
   <div class="spiner" *ngIf="!dataLoaded">
     <mat-spinner></mat-spinner><h4>Загрузка...</h4>
@@ -71,6 +72,7 @@
             <tr *ngFor="let result of resultsCommunity" (click)="onCommunityClick(result)">
               <td width="10">
                 <!--src="/Debt-Off/assets/community.jpg"-->
+                <!--src="../../assets/community.jpg"-->
                 <img class="pull-left img-circle nav-user-photo" width="50" src="/Debt-Off/assets/community.jpg" />  
               </td>
               <td>

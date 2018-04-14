@@ -22,11 +22,9 @@
         "styles.scss",
         "assets/css/style.css",
         "assets/css/bootstrap.min.css",
-        "assets/css/owl.carousel.css",
         "assets/css/responsive.css",
         "assets/css/font-awesome.min.css",
-        "assets/css/animate.min.css",
-        "assets/css/popup.css"
+        "assets/css/animate.min.css"
       ],
       "scripts": [
         "assets/js/jquery.min.js",

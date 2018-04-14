@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header" automation-id="title">
+    {{wallet.name}}
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center">
+      <p class="card-text m-0" automation-id="subtitle">Ваши расходы за последнюю неделю</p>
+      <button type="button"
+              class="btn"
+              automation-id="toggle-purchase-btn"
+              [class.btn-primary]="!isAddPurchaseOpen"
+              [class.btn-danger]="isAddPurchaseOpen"
+              (click)="toggleAdd()">
+        {{isAddPurchaseOpen ? 'Отменить' : 'Добавить'}}
+      </button>
+    </div>
+  </div>
+  <div class="card-body" *ngIf="isAddPurchaseOpen">
+    <app-add-purchase automation-id="new-purchase-form" (addPurchase)="onAddPurchase($event)"></app-add-purchase>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let purchase of purchases; let i = index">
+      <app-purchase-preview [attr.automation-id]="'purchase-preview-' + i"
+                            [purchase]="purchase"
+                            [isOpen]="isCurrentOpen(i)"
+                            (previewClick)="onPreviewClick(i)"
+                            (edit)="onPurchaseEdit($event)"
+                            (previewDelete)="onPreviewDelete(purchase)"></app-purchase-preview>
+    </li>
+  </ul>
+  <div class="card-footer text-center"
+       [class.text-danger]="balance < 0"
+       automation-id="total">
+    Баланс: <strong>{{balance | currency:'RUB':''}}</strong>
+  </div>
+</div>

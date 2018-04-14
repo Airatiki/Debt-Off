@@ -69,7 +69,7 @@
               <span [hidden]="!(formErrors.amount)">{{formErrors.amount}}</span>
             </mat-hint>
           </mat-input-container>
-          <md-slide-toggle formControlName="agree" color="primary">Сделать запрос на долг?</md-slide-toggle>
+          <mat-slide-toggle formControlName="agree" color="primary">Сделать запрос на долг?</mat-slide-toggle>
         </p>
         <button type="submit" mat-button class="btn btn-success text-floral-white" [disabled] = "debtForm.invalid">Отправить</button>
         <button mat-button class="btn btn-danger text-floral-white" (click)="cancelButton()">Отмена</button>

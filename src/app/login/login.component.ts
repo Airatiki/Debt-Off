@@ -3,7 +3,7 @@
   WILL BE CHANGED AND COMPONENT WILL BE USEFUL).
  */
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 import {AuthenticationService} from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   signin = true;
   returnUrl: string;
 
-  constructor(private dialogRef: MdDialogRef<LoginComponent>,
+  constructor(private dialogRef: MatDialogRef<LoginComponent>,
               private authenticationService: AuthenticationService,
               private router: Router, private route: ActivatedRoute) {
   }

@@ -44,6 +44,11 @@
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/home/wallets']" (click)="onMenuClick($event)">
+            <span class='glyphicon glyphicon-ruble'></span> Кошельки
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
           <a (click)="logout()" [routerLink]="['/header']">
             <span class='glyphicon glyphicon-off'></span> Выйти
           </a>

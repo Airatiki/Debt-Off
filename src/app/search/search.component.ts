@@ -35,8 +35,8 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('currentUser') === null) {
-      // window.location.href = 'http://localhost:4200';
-      window.location.href = 'https://airatiki.github.io/Debt-Off';
+      window.location.href = 'http://localhost:4200';
+      // window.location.href = 'https://airatiki.github.io/Debt-Off';
     }
   }
 

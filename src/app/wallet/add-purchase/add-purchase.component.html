@@ -1,0 +1,42 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="form-group">
+    <input formControlName="title"
+           type="text"
+           class="form-control"
+           automation-id="title-control"
+           placeholder="Название">
+    <div class="invalid-feedback" automation-id="title-error">
+      {{form.get('title').errors && getErrors(form.get('title').errors)}}
+    </div>
+  </div>
+  <div class="form-group">
+    <input formControlName="price"
+           type="text"
+           class="form-control"
+           automation-id="price-control"
+           placeholder="Стоимость">
+    <div class="invalid-feedback" automation-id="price-error">
+      {{form.get('price').errors && getErrors(form.get('price').errors)}}
+    </div>
+  </div>
+  <div class="form-group">
+    <input formControlName="date"
+           type="date"
+           class="form-control"
+           automation-id="date-control"
+           placeholder="Дата">
+  </div>
+  <div class="form-group">
+    <textarea formControlName="comment"
+              class="form-control"
+              automation-id="comment-control">
+    </textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit"
+            [disabled]="form.pristine || form.invalid"
+            automation-id="submit"
+            class="btn btn-success btn-block">Готово
+    </button>
+  </div>
+</form>

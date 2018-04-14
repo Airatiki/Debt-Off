@@ -55,17 +55,26 @@ $divider-color:        #BDBDBD;
   //background-color: lightgreen;
   color: white;
 }
+
+.button-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
 //
 .flex-spacer {
   flex: 1 1 auto;
 }
-//
-//
-//
-//.myBackdrop {
-//  background-color: bisque;
-//}
-//
-//.myClass .mat-dialog-container {
-//  background-color: bisque;
-//}
+
+.form-control.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+.invalid-feedback{
+  /* http://getbootstrap.com/docs/4.0/components/forms/#server-side подскажет, что делать*/
+  display: none;
+}
+
+.form-control.ng-invalid.ng-touched ~ .invalid-feedback {
+  display: block;
+}

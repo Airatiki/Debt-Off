@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-3 spiner align-items-center" *ngIf="!isWalletLoaded">
+    <mat-spinner></mat-spinner><h4>Загрузка...</h4>
+  </div>
+  <div class="row">
+    <div class="col-md-8" *ngFor="let wallet of wallets">
+      <app-wallet [wallet]="wallet"></app-wallet>
+    </div>
+    <div *ngIf="isWalletLoaded" class="col-md-8 wallet-add-form text-center">
+      <button class="btn btn-primary" *ngIf="showCreateButton" (click)="createWallet()">Добавить кошелек</button>
+      <form novalidate [formGroup]="walletForm" (ngSubmit)="onSubmit()" *ngIf="formCreated" >
+        <p>
+          <mat-input-container class="half-width"
+                               dividerColor="{{formErrors.name ? 'warn' : 'primary'}}" >
+            <input matInput formControlName="name" placeholder="Название" type="text" required>
+            <mat-hint>
+              <span [hidden]="!(formErrors.name)">{{formErrors.name}}</span>
+            </mat-hint>
+          </mat-input-container>
+          <mat-input-container class="half-width"  dividerColor="{{formErrors.amount ? 'warn' : 'primary'}}">
+            <input matInput formControlName="amount" placeholder="Баланс" type="number" pattern="[0-9]*" required>
+            <mat-hint>
+              <span [hidden]="!(formErrors.amount)">{{formErrors.amount}}</span>
+            </mat-hint>
+          </mat-input-container>
+        </p>
+        <button type="submit" mat-button class="btn btn-success text-floral-white" [disabled] = "walletForm.invalid">Создать</button>
+        <button mat-button class="btn btn-danger text-floral-white" (click)="cancelButton()">Отмена</button>
+      </form>
+    </div>
+
+  </div>
+</div>
