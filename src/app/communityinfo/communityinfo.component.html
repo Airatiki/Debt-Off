@@ -52,8 +52,30 @@
         <p>ID: {{community.id}}</p>
         <p>Участники: {{community.members.length}}</p>
 
-        <button mat-button (click)="leave()" class="primary-button" >Покинуть</button>
-        <button mat-button (click)="showGraph()" class="primary-button">Граф долгов</button>
+        <div class="column">
+          <button mat-button (click)="leave()" class="primary-button" >Покинуть сообщество</button>
+          <button mat-button (click)="showGraph()" class="primary-button">Граф долгов</button>
+          <button *ngIf="showAddButton" mat-button (click)="addInvoices()" class="primary-button">Распределить на группу</button>
+          <form class="form-margin-top" novalidate [formGroup]="debtForm" (ngSubmit)="onSubmit()" *ngIf="formCreated" >
+            <p>
+              <mat-input-container class="half-width"
+                                   dividerColor="{{formErrors.description ? 'warn' : 'primary'}}" >
+                <input matInput formControlName="description" placeholder="Описание" type="text" required>
+                <mat-hint>
+                  <span [hidden]="!(formErrors.description)">{{formErrors.description}}</span>
+                </mat-hint>
+              </mat-input-container>
+              <mat-input-container class="half-width"  dividerColor="{{formErrors.amount ? 'warn' : 'primary'}}">
+                <input matInput formControlName="amount" placeholder="Сумма" type="number" pattern="[0-9]*" required>
+                <mat-hint>
+                  <span [hidden]="!(formErrors.amount)">{{formErrors.amount}}</span>
+                </mat-hint>
+              </mat-input-container>
+            </p>
+            <button type="submit" mat-button class="btn btn-success text-floral-white" [disabled] = "debtForm.invalid">Отправить</button>
+            <button mat-button class="btn btn-danger text-floral-white" (click)="cancelButton()">Отмена</button>
+          </form>
+        </div>
       </mat-card-content>
 
       <!--<div *ngIf="graphLoaded">-->

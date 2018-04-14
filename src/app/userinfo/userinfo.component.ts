@@ -22,6 +22,10 @@ export class UserinfoComponent implements OnInit {
     'amount': '',
   };
 
+  formReturnErrors = {
+    'amount': ''
+  };
+
   validationMessages = {
     'description': {
       'required': 'Обязательное поле',
@@ -34,9 +38,19 @@ export class UserinfoComponent implements OnInit {
     }
   };
 
+  validationReturnMessages = {
+    'amount': {
+      'required': 'Обязательное поле',
+      'pattern': 'Поле должно содержать только цифры'
+    }
+  };
+
   showAddButton = true;
+  showReturnButton = true;
   formCreated = false;
+  formReturnCreated = false;
   debtForm: FormGroup;
+  debtReturnForm: FormGroup;
   debt: Debt;
 
   displayedColumns = ['Description', 'Date', 'Amount'];
@@ -49,8 +63,8 @@ export class UserinfoComponent implements OnInit {
   isUser = false;
   ngOnInit() {
     if (localStorage.getItem('currentUser') === null) {
-      window.location.href = 'http://localhost:4200';
-      // window.location.href = 'https://airatiki.github.io/Debt-Off';
+      // window.location.href = 'http://localhost:4200';
+      window.location.href = 'https://airatiki.github.io/Debt-Off';
     }
     this.database = new SummaryDataBase(this.userservice, this.route);
 
@@ -65,9 +79,17 @@ export class UserinfoComponent implements OnInit {
     });
 
     this.createForm();
+    this.createReturnForm();
   }
   addDebt() {
     this.formCreated = true;
+    this.showAddButton = false;
+    this.showReturnButton = false;
+  }
+
+  returnDebt() {
+    this.formReturnCreated = true;
+    this.showReturnButton = false;
     this.showAddButton = false;
   }
   createForm() {
@@ -77,6 +99,13 @@ export class UserinfoComponent implements OnInit {
       agree: false
     });
     this.debtForm.valueChanges.subscribe(data => this.onValueChanged(data));
+  }
+
+  createReturnForm() {
+    this.debtReturnForm = this.fb.group({
+      amount: ['', [Validators.required, Validators.pattern]]
+    });
+    this.debtReturnForm.valueChanges.subscribe(data => this.onValueReturnChanged(data));
   }
 
   onValueChanged(data?: any) {
@@ -90,6 +119,22 @@ export class UserinfoComponent implements OnInit {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
           this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  onValueReturnChanged(data?: any) {
+    if (!this.debtReturnForm) { return; }
+    const form = this.debtReturnForm;
+
+    for (const field in this.formReturnErrors) {
+      this.formReturnErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationReturnMessages[field];
+        for (const key in control.errors) {
+          this.formReturnErrors[field] += messages[key] + ' ';
         }
       }
     }
@@ -117,10 +162,24 @@ export class UserinfoComponent implements OnInit {
     this.cancelButton();
   }
 
+  onReturnSubmit() {
+    this.userservice.createInvoice(this.user.id, 'Возврат долга', this.debtReturnForm.value.amount)
+      .subscribe(res => console.log(res));
+    this.cancelReturnButton();
+  }
+
   cancelButton() {
     this.formCreated = false;
     this.showAddButton = true;
+    this.showReturnButton = true;
     this.debtForm.reset();
+  }
+
+  cancelReturnButton() {
+    this.formReturnCreated = false;
+    this.showReturnButton = true;
+    this.showAddButton = true;
+    this.debtReturnForm.reset();
   }
 
   vkNavigate(event, id: number) {

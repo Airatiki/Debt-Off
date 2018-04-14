@@ -7,7 +7,7 @@
       <app-wallet [wallet]="wallet"></app-wallet>
     </div>
     <div *ngIf="isWalletLoaded" class="col-md-8 wallet-add-form text-center">
-      <button class="btn btn-primary" *ngIf="showCreateButton" (click)="createWallet()">Добавить кошелек</button>
+      <button mat-button class="primary-button" *ngIf="showCreateButton" (click)="createWallet()">Добавить кошелек</button>
       <form novalidate [formGroup]="walletForm" (ngSubmit)="onSubmit()" *ngIf="formCreated" >
         <p>
           <mat-input-container class="half-width"

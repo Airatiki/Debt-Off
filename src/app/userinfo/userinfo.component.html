@@ -75,6 +75,21 @@
         <button mat-button class="btn btn-danger text-floral-white" (click)="cancelButton()">Отмена</button>
       </form>
 
+      <button mat-button (click)="returnDebt()" class="primary-button" *ngIf="showReturnButton">Вернуть долг</button>
+
+      <form novalidate [formGroup]="debtReturnForm" (ngSubmit)="onReturnSubmit()" *ngIf="formReturnCreated" >
+        <p>
+          <mat-input-container class="half-width"  dividerColor="{{formReturnErrors.amount ? 'warn' : 'primary'}}">
+            <input matInput formControlName="amount" placeholder="Сумма" type="number" pattern="[0-9]*" required>
+            <mat-hint>
+              <span [hidden]="!(formReturnErrors.amount)">{{formReturnErrors.amount}}</span>
+            </mat-hint>
+          </mat-input-container>
+        </p>
+        <button type="submit" mat-button class="btn btn-success text-floral-white" [disabled] = "debtReturnForm.invalid">Отправить</button>
+        <button mat-button class="btn btn-danger text-floral-white" (click)="cancelReturnButton()">Отмена</button>
+      </form>
+
 
     </mat-card-content>
   </mat-card>

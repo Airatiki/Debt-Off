@@ -1,8 +1,8 @@
-<div class="row">
+<div class="column">
     <div class="col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-2">
     <div class="card">
       <div class="card-header text-center">
-        Запросы на долг
+        Входящие запросы на долг
       </div>
       <div class="spiner" *ngIf="!dataLoaded">
         <mat-spinner></mat-spinner><h4>Загрузка...</h4>
@@ -37,6 +37,43 @@
         Общая задолженность: <strong>{{balance | currency:'RUB':'symbol'}}</strong>
       </div>
     </div>
+
+
+      <div class="card margin-top">
+        <div class="card-header text-center">
+          Исходящие запросы на долг
+        </div>
+        <div class="spiner" *ngIf="!dataLoaded">
+          <mat-spinner></mat-spinner><h4>Загрузка...</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let notification of outGoingNotifications; let i = index">
+            <div (click)="onClick(notification)"
+                 class="d-flex justify-content-between align-items-center preview-title">
+              <img class="pull-left img-circle nav-user-photo" width="30" src="{{notification.target.avatarUri}}" />
+              <span style="padding-left: 10px">{{notification.target.firstName}}</span>
+              <span class="right">
+            <span class="badge badge-secondary" >{{notification.amount | currency:'RUB':'symbol'}}</span>
+            </span>
+            </div>
+            <div class="preview-body" *ngIf="notification.clicked">
+              <table class="details">
+                <tr>
+                  <th>Описание:</th>
+                  <td>{{notification.description}}</td>
+                </tr>
+                <tr>
+                  <th>Дата:</th>
+                  <td>{{notification.time | date:'medium'}}</td>
+                </tr>
+              </table>
+            </div>
+          </li>
+        </ul>
+        <div class="card-footer text-center">
+          Общая сумма возврата долгов: <strong>{{outgoingBalance | currency:'RUB':'symbol'}}</strong>
+        </div>
+      </div>
 
   </div>
 </div>

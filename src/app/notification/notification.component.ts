@@ -12,13 +12,15 @@ export class NotificationComponent implements OnInit {
 
   dataLoaded = false;
   notifications: Notification[];
+  outGoingNotifications: Notification[];
   balance = 0;
+  outgoingBalance = 0;
   constructor(private userservice: UserService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     if (localStorage.getItem('currentUser') === null) {
-      window.location.href = 'http://localhost:4200';
-      // window.location.href = 'https://airatiki.github.io/Debt-Off';
+      // window.location.href = 'http://localhost:4200';
+      window.location.href = 'https://airatiki.github.io/Debt-Off';
     }
     this.getNotifications();
   }
@@ -27,7 +29,9 @@ export class NotificationComponent implements OnInit {
       .subscribe(data => {
         this.dataLoaded = true;
         this.notifications = data.ingoing;
+        this.outGoingNotifications = data.outgoing;
         this.balance = this.notifications.reduce((total, {amount}) => total += amount, 0);
+        this.outgoingBalance = this.outGoingNotifications.reduce((total, {amount}) => total += amount, 0);
       }, error => {
         console.log(error);
       });
