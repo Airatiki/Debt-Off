@@ -12,11 +12,8 @@
 .hero-section.centered {
   padding-top: 200%;
   padding-bottom: 300%;
-  /*border-bottom: 4px solid #69b9ff;*/
-  /*background-image: url('../assets/ttt.png');*/
   background-image: -webkit-linear-gradient(270deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../assets/ttt.png');
   background-image: linear-gradient(180deg, rgba(46, 157, 255, .5), rgba(46, 157, 255, .22)), url('../assets/ttt.png');
-  /*background-position: 100% 100%, 100% 100%;*/
   background-size: auto, cover;
   text-align: center;
 }

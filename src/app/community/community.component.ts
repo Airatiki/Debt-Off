@@ -10,10 +10,10 @@ import {Community} from '../shared/Community';
   styleUrls: ['./community.component.css']
 })
 export class CommunityComponent implements OnInit {
-
   dataLoaded = false;
   showCreateButton = true;
   formCreated = false;
+  communities: Community[];
   communityForm: FormGroup;
   communityToSubmit: Community;
   formErrors = {
@@ -27,8 +27,6 @@ export class CommunityComponent implements OnInit {
       'maxlength': 'Поле должно содержать менее 25 символов'
     }
   };
-  communities: Community[];
-
 
   constructor(private userservice: UserService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
   }
@@ -46,13 +44,12 @@ export class CommunityComponent implements OnInit {
       .subscribe(data => {
         this.dataLoaded = true;
         this.communities = data;
-      }, error => {
-        console.log(error);
       });
   }
 
   onClickCommunity(community) {
-    this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`], { relativeTo: this.route });
+    this.router.navigate([`/home/communityinfo/${community.id}/${community.name}`],
+      { relativeTo: this.route });
   }
 
   createCommunity() {

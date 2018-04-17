@@ -11,10 +11,6 @@
   display: block;
 }
 
-/*:host:hover .delete-btn {*/
-  /*right: -10px;*/
-/*}*/
-
 :host:hover .preview-title {
   padding-right: 20px;
 }
@@ -59,8 +55,6 @@
 }
 
 .delete-btn {
-  /*position: absolute;*/
-  /*right: 0;*/
   transition: all .2s;
   opacity: .5;
 }
@@ -72,14 +66,6 @@
 .delete-btn:active {
   opacity: .7;
 }
-
-/*.col-md-6 {*/
-  /*position: relative;*/
-  /*width: 50%;*/
-  /*min-height: 1px;*/
-  /*padding-right: 15px;*/
-  /*padding-left: 15px;*/
-/*}*/
 
 .card {
   position: relative;

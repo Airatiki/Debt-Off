@@ -54,7 +54,8 @@ export class UserService {
     return this.http.get(BASE_URL + '/community/' + id, this.jwt()).map(data => data.json());
   }
   getCommunities(): Observable<Community[]> {
-    return this.http.get(BASE_URL + '/community', this.jwt()).map(data => data.json());
+    return this.http.get(BASE_URL + '/community', this.jwt())
+                    .map(data => data.json());
   }
   getNotifications(): Observable<NotificationStore> {
     return this.http.get(BASE_URL + '/invoice/user', this.jwt()).map(data => data.json());

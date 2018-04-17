@@ -1,17 +1,9 @@
-<!--<div class="container flex-spacer"-->
-     <!--fxLayout="column"-->
-     <!--fxLayout.sm="column"-->
-     <!--fxLayout.xs="column"-->
-     <!--fxLayoutAlign.gt-md="space-around center"-->
-     <!--fxLayoutGap="10px">-->
-
 <div class="row col-md-8 col-md-offset-2 col-sm-12">
 
 <div  class="example-container mat-elevation-z8">
   <div class="spiner" *ngIf="!dataLoaded">
     <mat-spinner></mat-spinner><h4>Загрузка...</h4>
   </div>
-  <!--<h3>CREDITS, <span class="total">{{totalCreditsAmount}}</span></h3>-->
   <div class="preview-title" *ngIf="dataLoaded">
     Кредиты
     <span>Итого: <strong>{{creditsDatabase.totalAmount | currency:'RUB':'symbol'}}</strong></span>
@@ -39,12 +31,10 @@
       <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
     </ng-container>
 
-    <!-- Color Column -->
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef> Сумма </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span automation-id="price" class="badge badge-success">{{row.totalAmount | currency:'RUB':'symbol'}}</span>
-        <!--{{row.totalAmount}} -->
       </mat-cell>
     </ng-container>
 
@@ -74,7 +64,6 @@
     Долги
     <span>Итого: <strong>{{debtsDatabase.totalAmount | currency:'RUB':'symbol'}}</strong></span>
   </div>
-  <!--,  Total Amount: {{totalDebtsAmount}}-->
 
   <mat-table #tabl [dataSource]="dataDebts">
 
@@ -98,12 +87,10 @@
       <mat-cell *matCellDef="let row"> {{row.user.lastName}} </mat-cell>
     </ng-container>
 
-    <!-- Color Column -->
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef> Сумма </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span automation-id="price" class="badge badge-danger">{{row.totalAmount | currency:'RUB':'symbol'}}</span>
-        <!--{{row.totalAmount}} -->
       </mat-cell>
     </ng-container>
 
@@ -120,5 +107,4 @@
   </mat-paginator>
 </div>
 </div>
-<!--</div>-->
 
