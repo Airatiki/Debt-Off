@@ -1,6 +1,6 @@
 import {User} from './User';
 
-export class Notification {
+export class NotificationDTO {
   id: number;
   target: User;
   amount: number;
@@ -9,6 +9,6 @@ export class Notification {
 }
 
 export class NotificationStore {
-  ingoing?: Notification[];
-  outgoing?: Notification[];
+  ingoing?: NotificationDTO[];
+  outgoing?: NotificationDTO[];
 }

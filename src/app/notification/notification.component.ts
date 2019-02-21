@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Notification} from '../shared/Notification';
+import {NotificationDTO, NotificationStore} from '../shared/Notification';
 
 @Component({
   selector: 'app-notification',
@@ -11,10 +11,11 @@ import {Notification} from '../shared/Notification';
 export class NotificationComponent implements OnInit {
 
   dataLoaded = false;
-  notifications: Notification[];
-  outGoingNotifications: Notification[];
+  notifications: NotificationDTO[];
+  outGoingNotifications: NotificationDTO[];
   balance = 0;
   outgoingBalance = 0;
+  savedData: NotificationStore;
   constructor(private userservice: UserService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class NotificationComponent implements OnInit {
     this.getNotifications();
   }
   getNotifications() {
+    Notification.requestPermission();
     this.userservice.getNotifications()
       .subscribe(data => {
         this.dataLoaded = true;
@@ -32,9 +34,48 @@ export class NotificationComponent implements OnInit {
         this.outGoingNotifications = data.outgoing;
         this.balance = this.notifications.reduce((total, {amount}) => total += amount, 0);
         this.outgoingBalance = this.outGoingNotifications.reduce((total, {amount}) => total += amount, 0);
+
+        this.reloadNotifications(data);
       }, error => {
         console.log(error);
       });
+  }
+
+  reloadNotifications(data: any) {
+    if (!this.savedData) {
+      this.savedData = data;
+      setTimeout(() => this.getNotifications(), 5000);
+
+      return;
+    }
+
+    const differIngoing = data.ingoing.filter(item => this.savedData.ingoing.indexOf(item) === -1);
+    const differOutgoing = data.outgoing.filter(item => this.savedData.outgoing.map(not => not.id).indexOf(item.id) === -1);
+
+    this.savedData = data;
+
+    if (this.router.url !== '/home/notifications') {
+      if (differIngoing.length !== 0) {
+        const ing = differIngoing[0];
+
+        const call = new Notification(`${ing.target.firstName} просит вернуть долг`, {
+          body: `${ing.description} : ${ing.amount} руб.`,
+          icon: 'https://goo.gl/3eqeiE',
+        });
+      }
+
+      if (differOutgoing.length !== 0) {
+        const out = differOutgoing[0];
+
+        const call = new Notification(`${out.target.firstName} просит вернуть долг`, {
+          body: `${out.description} : ${out.amount} руб.`,
+          icon: 'https://goo.gl/3eqeiE',
+        });
+      }
+    }
+
+    setTimeout(() => this.getNotifications(), 5000);
+
   }
 
   onClick(notification) {

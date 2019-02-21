@@ -9,7 +9,9 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "firebase-messaging-sw.js",
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -19,7 +21,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss",
+        "styles.css",
         "assets/css/style.css",
         "assets/css/bootstrap.min.css",
         "assets/css/responsive.css",
