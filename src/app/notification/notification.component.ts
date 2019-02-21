@@ -49,7 +49,7 @@ export class NotificationComponent implements OnInit {
       return;
     }
 
-    const differIngoing = data.ingoing.filter(item => this.savedData.ingoing.indexOf(item) === -1);
+    const differIngoing = data.ingoing.filter(item => this.savedData.ingoing.map(not => not.id).indexOf(item) === -1);
     const differOutgoing = data.outgoing.filter(item => this.savedData.outgoing.map(not => not.id).indexOf(item.id) === -1);
 
     this.savedData = data;
